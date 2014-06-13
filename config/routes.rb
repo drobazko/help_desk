@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
 
+  devise_for :stuffs
+  
   root 'tickets#new'
 
-  resources :tickets
-
+  resources :tickets, only: [:new, :create]
+  
+  match 'tickets/:token' => 'tickets#show', :via => :get, :as => 'ticket_show'
+  match 'tickets/:token' => 'tickets#update', :via => :put, :as => 'ticket'
+  match 'tickets/:token/edit' => 'tickets#edit', :via => :get, :as => 'ticket_edit'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

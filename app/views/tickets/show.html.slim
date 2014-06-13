@@ -1,2 +1,12 @@
-h1 Tickets#show
-p Find me in app/views/tickets/show.html.slim
+h1 Ticket Id #{@ticket.token}
+
+- if flash.now[:notice]
+	div[class="notice"] 	
+		#{flash.now[:notice]}
+
+div
+	- @ticket.attributes.each do |name, value|
+		div
+			#{name.titleize} : #{value}
+div
+	#{link_to "Edit Ticket", ticket_edit_path(@ticket.token)}

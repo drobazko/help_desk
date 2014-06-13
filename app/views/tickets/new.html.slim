@@ -1,19 +1,7 @@
 h1 Add a new Ticket
+
 = form_for @ticket do |f|
-	p
-		= f.label :customer_name, "Customer Name:"
-		= f.text_field :customer_name
-	p
-		= f.label :customer_email, "Customer Email:"
-		= f.text_field :customer_email
+   	= render partial: "fields", locals: {f: f}
 
-	p
-		= f.label :subject, "Ticket Subject:"
-		= f.text_field :subject
-
-	div 
-	    = f.label :filepicker_url, "Upload Your Avatar:"
-	    = f.filepicker_field :filepicker_url
-
-	p
+	div
 		= f.submit "Create a Ticket"

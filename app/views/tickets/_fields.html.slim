@@ -1,0 +1,31 @@
+- if @ticket.errors.any?
+	div[id = "error_explanation"]
+		h2
+			= pluralize(@ticket.errors.count, "error")
+		ul
+			- @ticket.errors.full_messages.each do |msg|
+				li
+					= msg
+
+div
+	div
+		= f.label :customer_name, "Customer Name:"
+	div
+		= f.text_field :customer_name
+div
+	div
+		= f.label :customer_email, "Customer Email:"
+	div
+		= f.email_field :customer_email, {:placeholder => 'user@domain.com'}
+
+div
+	div
+		= f.label :subject, "Ticket Subject:"
+	div
+		= f.text_field :subject
+
+div
+	div
+		= f.label :body, "Ticket Body:"
+	div
+		= f.text_area(:body, size: '16x4')

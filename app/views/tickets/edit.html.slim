@@ -1,2 +1,7 @@
-h1 Tickets#edit
-p Find me in app/views/tickets/edit.html.slim
+h1 Edit a Ticket
+
+= form_for @ticket, url: ticket_path(@ticket.token), method: :put do |f|
+   	= render partial: "fields", locals: {f: f}
+
+	div
+		= f.submit "Update a Ticket"
