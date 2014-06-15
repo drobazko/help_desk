@@ -6,6 +6,9 @@ class TicketsController < ApplicationController
     @tickets = Ticket.all
   end
 
+  def broadcast
+  end
+
   def new
     @ticket = Ticket.new
     @ticket.pictures.build

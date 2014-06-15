@@ -5,6 +5,8 @@ html
 
 		= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
 		= javascript_include_tag "application", "data-turbolinks-track" => true
+		= javascript_include_tag :defaults, "http://localhost:9292/faye.js"
+
 		= csrf_meta_tags
 	body
 		header[class="nav-bar"]
