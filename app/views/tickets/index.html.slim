@@ -1,2 +1,6 @@
-h1 Tickets#index
-p Find me in app/views/tickets/index.html.slim
+- content_for :admin_list do
+	h1 List of Tickets
+	div[class="voffset4"]
+		= render(partial: @tickets, spacer_template: "shared/spacer") || "There are no tickets for this staff member yet"
+
+= render :template => 'layouts/admin_layout'

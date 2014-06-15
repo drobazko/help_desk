@@ -12,9 +12,81 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery.fileupload-ui
  */
+@media (min-width: 1200px) {
+	body {padding-bottom: 100px;}
+	.container {
+		width: 1170px;
+	}
+}
 
- .notice {
- 	color: blue;
- 	font-weight: bold;
- }
+header {
+	color: #F0F0F0;
+	background: #00518F;
+	padding: 10px 10px;
+}
+
+.clear-float { overflow: auto; }
+
+.bold { font-weight: bold;}
+
+.clear { clear: both }
+
+.notice {
+	color: blue;
+	font-weight: bold;
+}
+
+.drop-box { width: 500px; }
+
+.menu { margin-right: 30px; }
+
+.menu ul { margin: 0px; }
+
+.to-left { float: left; }
+
+.spacer {margin: 5px;}
+
+.voffset2 { margin-top: 10px; }
+
+.voffset4 { margin-top: 30px; }
+
+.posts > div { clear: both; overflow: auto; }
+
+.actions > div {float: left; margin-right: 10px;}
+
+
+nav ul {
+    list-style: none outside none;
+}
+
+.menu li {
+    padding-bottom: 15px;
+    vertical-align: middle;
+}
+
+.menu li a.menu-selected {
+    background-color: #C5D9EB;
+    color: #00518F;
+    display: block;
+    font-size: 15px;
+    padding: 5px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.menu li a {
+    color: #00518F;
+    display: block;
+    font-size: 15px;
+    padding: 0px 0px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.menu a:hover {
+	background-color: #C5D9EB;
+}
+
+.border-row { border-bottom: 2px solid #ccc; }

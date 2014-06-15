@@ -1,0 +1,7 @@
+- content_for :admin_list do
+	h2 List of Posts
+	h3 Staff Member: #{@staff.name}
+	div[class="posts"]
+		= render(partial: @posts, spacer_template: "shared/spacer") || "There are no posts for this staff member yet"
+
+= render :template => 'layouts/admin_layout'

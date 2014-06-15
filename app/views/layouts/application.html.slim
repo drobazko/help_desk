@@ -1,22 +1,34 @@
 doctype html
 html
 	head
-		title "Help Desk App"
+		title Help Desk App
 
 		= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
 		= javascript_include_tag "application", "data-turbolinks-track" => true
 		= csrf_meta_tags
 	body
-		
-		p[class="notice"]
-	   		= notice
-		p[class="notice"]
-			= alert
+		header[class="nav-bar"]
+			h1 Help Desk App
+		div[class="container"]
+			div[class="row"]
+				div[class="span12 voffset4"]
+					div
+						p[class="notice"]
+					   		= notice
+						p[class="notice"]
+							= alert
+					div
+						- unless current_staff
+								= link_to 'Sign in', new_staff_session_path
+						- else
+							div
+								| You are #{current_staff.you}
+							div
+								= link_to 'Sign out', destroy_staff_session_path
 
-		div
-			- unless current_stuff
-				= link_to 'Sign in', new_stuff_session_path
-			- else
-				= current_stuff.email
+						- if current_staff
+							div
+								= link_to 'View Tickets', tickets_path
 
-		= yield
+			div[class="row voffset4"]
+				= yield

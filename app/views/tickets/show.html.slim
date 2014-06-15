@@ -1,12 +1,55 @@
-h1 Ticket Id #{@ticket.token}
+div[class="span12"]
+	h1[class="clear"] Ticket Id #{@ticket.token}
 
-- if flash.now[:notice]
-	div[class="notice"] 	
-		#{flash.now[:notice]}
-
-div
-	- @ticket.attributes.each do |name, value|
+	div[class="ticket-info clear"]
 		div
-			#{name.titleize} : #{value}
-div
-	#{link_to "Edit Ticket", ticket_edit_path(@ticket.token)}
+			div[class="bold"] Status
+			div #{@ticket.status.title}
+
+		div
+			div[class="bold"] Customer
+			div #{@ticket.customer_name} (#{@ticket.customer_email})
+
+		div
+			div[class="bold"] Subject
+			div #{@ticket.subject}
+
+		div
+			div[class="bold"] Body
+			div #{@ticket.body}
+
+		- if @ticket.staff
+			div
+				div[class="bold"] Staff
+				div #{@ticket.staff} = "(#{@ticket.department.title})" if @ticket.department
+
+		div
+			div[class="bold"] Created At
+			div #{@ticket.created_at}
+
+		- unless @ticket.created_at === @ticket.updated_at
+			div
+				div[class="bold"] Updated At
+				div #{@ticket.updated_at}
+
+	div[class="pictures"]
+		= render(partial: @ticket.pictures, spacer_template: "shared/spacer")
+
+	div[class="voffset4 action-buttons clear clear-float"]
+		div
+			#{link_to "New Ticket", new_ticket_path, class: 'btn btn-primary', type: 'button'}
+
+		- unless current_staff
+			div
+				#{link_to "Edit Ticket", ticket_edit_path(@ticket.token), class: 'btn btn-primary', type: 'button'}
+
+	div[class="border-row voffset4"]
+
+	div[class="clear answers voffset4"]
+		div	Answers
+		div
+			- if @ticket.staff and @ticket.staff.posts
+			  = render @ticket.staff.posts
+			- else  
+			  	| There are no answers available
+

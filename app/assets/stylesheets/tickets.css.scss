@@ -1,3 +1,7 @@
 // Place all the styles related to the Tickets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.ticket-info > div { margin-bottom: 5px; }
+.ticket-info > div > div:nth-child(even) { padding-left: 20px; }
+.action-buttons > div { float: left; margin-right: 10px;}

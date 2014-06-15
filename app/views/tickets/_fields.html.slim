@@ -1,31 +1,39 @@
-- if @ticket.errors.any?
-	div[id = "error_explanation"]
-		h2
-			= pluralize(@ticket.errors.count, "error")
-		ul
-			- @ticket.errors.full_messages.each do |msg|
-				li
-					= msg
+= render partial: 'shared/errors', locals: {entity: @ticket}
 
 div
 	div
 		= f.label :customer_name, "Customer Name:"
 	div
-		= f.text_field :customer_name
+		= f.text_field :customer_name, value: "Alex Drobazko"
 div
 	div
 		= f.label :customer_email, "Customer Email:"
 	div
-		= f.email_field :customer_email, {:placeholder => 'user@domain.com'}
-
+		= f.email_field :customer_email, {:placeholder => 'user@domain.com', value: "drobazko@gmail.com"}
 div
 	div
 		= f.label :subject, "Ticket Subject:"
 	div
-		= f.text_field :subject
+		= f.text_field :subject, value: "Sample Subject"
 
+div
+	div
+		= f.label :department_id, "Department:"
+	div
+		= f.select(:department_id, departments_for_select, { :include_blank => true, :selected => @ticket.department_id })
 div
 	div
 		= f.label :body, "Ticket Body:"
 	div
-		= f.text_area(:body, size: '16x4')
+		= f.text_area(:body, size: '16x4', value: "Sample Body") 
+
+div
+	= render @pictures if @pictures
+
+div
+  	= f.fields_for :pictures, Picture.new do |p|
+	    div
+	       = p.label :content, "ScreenShots"
+	       = p.file_field :content
+	       /, :multiple => true, name: "pictures[content][]"
+

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use mysql as the database for Active Record
@@ -41,3 +40,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'slim-rails'
 gem 'devise'
 gem 'cancan'
+gem 'rakismet'
+gem 'carrierwave'
+gem 'jquery-fileupload-rails'
+gem 'rmagick', :require => false
+gem 'postmark-rails', '~> 0.5.0' 
+gem 'faker', '1.0.1'
+#gem 'websocket-rails'
+
+gem 'mysql2', :platform => :ruby
+gem 'jdbc-mysql', '5.1.28', :platform => :jruby
+gem 'thinking-sphinx', '~> 3.1.0'

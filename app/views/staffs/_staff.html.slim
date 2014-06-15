@@ -1,0 +1,6 @@
+div
+	| #{staff.name } ( #{staff.email} )
+
+div[class="member-actions"]
+	div
+		= link_to "view posts", staff_posts_path(staff.id)

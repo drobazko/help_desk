@@ -1,0 +1,23 @@
+div[class="menu to-left span3"]
+	nav
+		ul
+			li 
+				= link_to "New Unassigned Tickets", tickets_path(:section => "unassigned")
+
+			li
+				= link_to "Open Tickets", tickets_path(:section => "opened")
+
+			li
+				= link_to "On Hold Tickets", tickets_path(:section => "on_hold")
+
+			li
+				= link_to "Closed Tickets", tickets_path(:section => "closed")
+
+			li
+				= link_to "Manage Members", list_staff_path
+
+			li
+				= link_to "Change Password", edit_staff_path
+
+div[class="to-left span9"]
+	= yield(:admin_list)

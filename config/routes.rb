@@ -1,10 +1,30 @@
 Rails.application.routes.draw do
-
-  devise_for :stuffs
-  
   root 'tickets#new'
 
-  resources :tickets, only: [:new, :create]
+  get 'pictures/index'
+
+  get 'pictures/new'
+
+  get 'pictures/create'
+
+  get 'pictures/update'
+
+  devise_for :staffs
+
+  resource :staff, only: [:edit] do
+    collection do
+      patch 'update_password'
+      get 'list'
+    end
+  end 
+
+  resources :staffs do
+    resources :posts
+  end
+
+  resources :tickets, only: [:index, :new, :create]
+  resources :pictures
+
   
   match 'tickets/:token' => 'tickets#show', :via => :get, :as => 'ticket_show'
   match 'tickets/:token' => 'tickets#update', :via => :put, :as => 'ticket'

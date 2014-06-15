@@ -1,0 +1,1 @@
+$('#edit_picture_<%= @picture.id %>').closest('div').fadeOut('slow');

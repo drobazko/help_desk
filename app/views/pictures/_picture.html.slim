@@ -1,0 +1,7 @@
+- unless picture.new_record?
+	div[id="edit_picture_#{picture.id}"]
+		div
+			= image_tag(picture.content.thumb, :size => '200x200')
+
+		div 
+			= link_to 'delete', picture_path(picture), method: :delete, data: {remote: true, confirm: "Are you sure?"}

@@ -1,7 +1,8 @@
-h1 Edit a Ticket
+div[class="span12"]
+	h1 Edit a Ticket
 
-= form_for @ticket, url: ticket_path(@ticket.token), method: :put do |f|
-   	= render partial: "fields", locals: {f: f}
+	= form_for @ticket, url: ticket_path(@ticket.token), method: :put do |f|
+	   	= render partial: "fields", locals: {f: f}
 
-	div
-		= f.submit "Update a Ticket"
+		div[class="voffset4"]
+			= f.submit "Update a Ticket", class: 'btn btn-primary', type: 'submit'
