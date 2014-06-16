@@ -1,5 +1,12 @@
 class Ticket < ActiveRecord::Base
 	include Rakismet::Model
+
+	SECTIONS = {
+		unassigned: "New Unassigned Tickets",
+		opened: "Open Tickets",
+		on_hold: "On Hold Tickets",
+		closed: "Closed Tickets"
+	}
 	
 	has_many :pictures, as: :imageable
 	has_many :posts
@@ -45,6 +52,10 @@ class Ticket < ActiveRecord::Base
 		end
 	end
 
+	scope :with_department, ->(staff) { staff.department_id ? where(department_id: staff.department_id ) : all }
 	scope :unassigned, -> { where(staff_id: nil) }
-	
+	scope :on_hold, -> { joins(:status).where("statuses.short_title in ('on_hold')") }
+	scope :opened, -> { joins(:status).where("statuses.short_title in ('opened')") }
+	scope :closed, -> { joins(:status).where("statuses.short_title in ('cancelled', 'completed')") }
+
 end

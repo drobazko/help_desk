@@ -30,10 +30,14 @@ Rails.application.routes.draw do
   resources :pictures
 
   
+  match 'tickets/suggestions' => 'tickets#suggestions', :via => :get, :as => 'ticket_suggestion'
+  match 'tickets/search_form' => 'tickets#search_form', :via => :get, :as => 'ticket_search_form'
+  match 'tickets/search' => 'tickets#search', :via => :post, :as => 'ticket_search'
   match 'tickets/broadcast' => 'tickets#broadcast', :via => :get, :as => 'ticket_broadcast'
   match 'tickets/:token' => 'tickets#show', :via => :get, :as => 'ticket_show'
   match 'tickets/:token' => 'tickets#update', :via => :put, :as => 'ticket'
   match 'tickets/:token/edit' => 'tickets#edit', :via => :get, :as => 'ticket_edit'
+  
 
   
   # The priority is based upon order of creation: first created -> highest priority.

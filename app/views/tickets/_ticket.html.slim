@@ -1,7 +1,7 @@
 = form_for ticket
 	div[class="clear voffset4"]
-		div[class="bold"] = link_to ticket.subject, ticket_show_path(ticket.token)
-		div = ticket.body
+		div[class="bold"] = link_to highlight(ticket.subject, params[:query].split), ticket_show_path(ticket.token)
+		div = highlight(ticket.body, params[:query].split)
 		div Status: #{ticket.status.title}
 		
 		- if ticket.staff 
@@ -17,3 +17,5 @@
 			div = link_to "reply" 
 			div = link_to "view", ticket_show_path(ticket.token)
 
+consequuntur 
+consequuntur

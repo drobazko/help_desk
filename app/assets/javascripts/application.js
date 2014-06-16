@@ -23,4 +23,14 @@ $(function() {
 	//	eval(data);
 	//});	
 
+	$('#token').autocomplete({
+		serviceUrl:'tickets/suggestions',
+		onSelect: function(value, data){ 
+			$("#sugg_form input").remove();
+			$("#sugg_form").attr('action', 'tickets/' + value).submit();
+		}
+	}
+
+	);
+
 });

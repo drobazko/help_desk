@@ -1,17 +1,12 @@
+div
+	= form_tag nil, id: "sugg_form", method: :get
+		= text_field_tag :token, params[:token], placeholder: "OAZ-217-YMH-824-PIO"
 div[class="menu to-left span3"]
 	nav
 		ul
-			li 
-				= link_to "New Unassigned Tickets", tickets_path(:section => "unassigned")
-
-			li
-				= link_to "Open Tickets", tickets_path(:section => "opened")
-
-			li
-				= link_to "On Hold Tickets", tickets_path(:section => "on_hold")
-
-			li
-				= link_to "Closed Tickets", tickets_path(:section => "closed")
+			- Ticket::SECTIONS.each do |k, v|
+				li 
+					= link_to v, tickets_path(:section => k)
 
 			li
 				= link_to "Manage Members", list_staff_path
@@ -21,6 +16,10 @@ div[class="menu to-left span3"]
 
 			li
 				= link_to "Create a Member", new_staff_path
+
+			li
+				= link_to "Full Text Search", ticket_search_form_path
+
 
 div[class="to-left span9"]
 	= yield(:admin_list)

@@ -1,9 +1,12 @@
 class TicketsController < ApplicationController
-  before_filter :authenticate_staff!, only: [:index]
+  before_filter :authenticate_staff!, :set_section_type, only: [:index]
   before_filter :load_ticket, only: [:show, :edit, :update]
 
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.with_department(current_staff).send(params[:section])
+    #@tickets = Ticket.closed
+    
+
   end
 
   def broadcast
@@ -45,15 +48,47 @@ class TicketsController < ApplicationController
     end
   end
 
- private
-  def load_ticket
-    @ticket = Ticket.find_by_token(params[:token])    
-    @pictures = @ticket.pictures.any? ? @ticket.pictures.clone : Picture.none
-    @staff = current_staff || Staff.find_by_email(@ticket.customer_email)
+  def suggestions
+    @tikets = Ticket.where("token like ?", "#{params[:query]}%")
+  
+    suggestions = []
+    data = []
+    @tikets.each{|v|
+      suggestions << v[:token]
+      data << v[:id]
+    }
+
+    res = {
+      'query' => 'Li',
+      'suggestions' => suggestions,
+      'data' => data
+    }
+
+    render :text => res.to_json
   end
 
-  def ticket_params
-    params.require(:ticket).permit(:customer_name, :customer_email, :subject, :body, :department_id, pictures_attributes: [:content])
+  def search_form
+    @tickets = Ticket.none
   end
 
+  def search
+    @tickets = Ticket.search(params[:query])
+    render 'search_form'
+  end
+
+  private
+    def load_ticket
+      @ticket = Ticket.find_by_token(params[:token])    
+      @pictures = @ticket.pictures.any? ? @ticket.pictures.clone : Picture.none
+      @staff = current_staff || Staff.find_by_email(@ticket.customer_email)
+    end
+
+    def ticket_params
+      params.require(:ticket).permit(:customer_name, :customer_email, :subject, :body, :department_id, pictures_attributes: [:content])
+    end
+
+    def set_section_type
+      params[:section] ||= "unassigned"
+    end
+    
 end
