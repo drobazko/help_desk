@@ -1,1 +1,1 @@
-$('#edit_post_<%= @post.id %>').closest('div').fadeOut('slow');
+$('#edit_post_<%= @post.id %>').fadeOut('slow');

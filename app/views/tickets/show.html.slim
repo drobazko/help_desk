@@ -32,24 +32,45 @@ div[class="span12"]
 				div[class="bold"] Updated At
 				div #{@ticket.updated_at}
 
-	div[class="pictures"]
-		= render(partial: @ticket.pictures, spacer_template: "shared/spacer")
+	div[class="pictures clear-float voffset4"]
+		= render(partial: @ticket.pictures)
 
 	div[class="voffset4 action-buttons clear clear-float"]
-		div
-			#{link_to "New Ticket", new_ticket_path, class: 'btn btn-primary', type: 'button'}
-
 		- unless current_staff
+			div
+				#{link_to "New Ticket", new_ticket_path, class: 'btn btn-primary', type: 'button'}
+
 			div
 				#{link_to "Edit Ticket", ticket_edit_path(@ticket.token), class: 'btn btn-primary', type: 'button'}
 
 	div[class="border-row voffset4"]
 
-	div[class="clear answers voffset4"]
-		div	Answers
-		div
-			- if @ticket.staff and @ticket.staff.posts
-			  = render @ticket.staff.posts
+	div	
+		= form_for [@staff, @post], remote: true, html: {multipart: :true} do |f|
+			= token_tag form_authenticity_token
+			= hidden_field_tag 'ticket_token', "#{@ticket.token}"
+
+			div[class="voffset4"]
+				div
+					= f.text_area(:body, size: '16x4', value: "Comment") 
+				div
+				  	= f.fields_for :pictures, Picture.new, remote: true do |p|
+
+					    div
+					       /= p.label :content, "ScreenShots"
+					       = p.file_field :content
+					       /, :multiple => true, name: "pictures[content][]"
+
+				div
+					= f.submit "Post ", class: 'btn btn-primary', type: 'submit'
+
+
+	div[class="clear voffset4"]
+		div[class="bold"] Answers
+		div[class="voffset4 posts"]
+			- if @ticket.posts.any?
+			  	= render @ticket.posts.order(updated_at: :desc)
 			- else  
-			  	| There are no answers available
+			  	p[class="no-posts"] There are no answers available
+
 

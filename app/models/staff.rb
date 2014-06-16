@@ -5,12 +5,16 @@ class Staff < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :tickets
-  has_many :posts, as: :postable
+  has_many :posts
 
   belongs_to :department
 
   def you
   	"#{name} (#{email})"
+  end
+
+  def admin?
+    role == 'admin'
   end
 end
 

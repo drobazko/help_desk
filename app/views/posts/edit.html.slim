@@ -1,7 +1,7 @@
 - content_for :admin_list do
 	h1 Edit Post
 
-	= form_for [@staff, @post] do |f|
+	= form_for [@owner, @post] do |f|
 		= render partial: 'shared/errors', locals: {entity: @post}	
 
 		div
@@ -14,6 +14,6 @@
 			= f.submit "Update the Post", class: 'btn btn-primary'
 
 	div
-		= link_to "List of Posts", staff_posts_path(@staff.id)
+		= link_to "List of Posts", staff_posts_path(@owner.id)
 
 = render :template => 'layouts/admin_layout'

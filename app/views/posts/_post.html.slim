@@ -1,13 +1,24 @@
-= form_for [@staff, post]
-	div
-		div	
-			div = post.body
-
+div
+	= form_for [post.staff, post]
 		div
-			div created_at #{post.created_at}
-			div updated_at #{post.updated_at}
+			div	
+				div = post.body
+
+			div
+				div created_at #{post.created_at}
+				div updated_at #{post.updated_at}
+			div 
+				| by #{ post.staff.name }
+
+			div[class="pictures clear-float"]
+				= render(partial: post.pictures)
 		
-	div[class="actions"]
-		div = link_to "edit", edit_staff_post_path(post.postable.id, post.id)
-		div = link_to "delete", staff_post_path(post.postable.id, post.id), method: :delete, data: { confirm: 'Are you sure?', remote: true }
+			
+		div[class="actions"]
+			div = link_to "[edit]", edit_staff_post_path(post.staff.id, post.id)
+			#{can? :destroy, post}
+			= debug [post.staff_id, current_staff]
+
+			- if can? :destroy, post
+				div = link_to "[delete post]", staff_post_path(post.staff.id, post.id), method: :delete, data: { confirm: 'Are you sure?', remote: true }
 

@@ -39,15 +39,13 @@ ActiveRecord::Schema.define(version: 20140615193124) do
   add_index "pictures", ["imageable_id", "imageable_type"], name: "index_pictures_on_imageable_id_and_imageable_type", using: :btree
 
   create_table "posts", force: true do |t|
-    t.text     "body",          null: false
-    t.integer  "postable_id"
-    t.string   "postable_type"
+    t.text     "body",       null: false
+    t.integer  "staff_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "ticket_id"
   end
 
-  add_index "posts", ["postable_id", "postable_type"], name: "index_posts_on_postable_id_and_postable_type", using: :btree
   add_index "posts", ["ticket_id"], name: "index_posts_on_ticket_id", using: :btree
 
   create_table "staffs", force: true do |t|
@@ -66,13 +64,11 @@ ActiveRecord::Schema.define(version: 20140615193124) do
     t.string   "role",                   default: "member", null: false
     t.string   "name"
     t.integer  "department_id"
-    t.integer  "ticket_id"
   end
 
   add_index "staffs", ["department_id"], name: "index_staffs_on_department_id", using: :btree
   add_index "staffs", ["email"], name: "index_staffs_on_email", unique: true, using: :btree
   add_index "staffs", ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true, using: :btree
-  add_index "staffs", ["ticket_id"], name: "index_staffs_on_ticket_id", using: :btree
 
   create_table "statuses", force: true do |t|
     t.string   "title",       null: false
@@ -102,13 +98,5 @@ ActiveRecord::Schema.define(version: 20140615193124) do
   add_index "tickets", ["staff_id"], name: "index_tickets_on_staff_id", using: :btree
   add_index "tickets", ["status_id"], name: "index_tickets_on_status_id", using: :btree
   add_index "tickets", ["token"], name: "index_tickets_on_token", unique: true, using: :btree
-
-  create_table "users", force: true do |t|
-    t.string   "email",      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

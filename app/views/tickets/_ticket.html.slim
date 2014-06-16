@@ -1,3 +1,19 @@
-div
-	div[class="bold"] = link_to ticket.subject, ticket_show_path(ticket.token)
-	div = ticket.body
+= form_for ticket
+	div[class="clear voffset4"]
+		div[class="bold"] = link_to ticket.subject, ticket_show_path(ticket.token)
+		div = ticket.body
+		div Status: #{ticket.status.title}
+		
+		- if ticket.staff 
+			div 
+				| Staff Name #{ ticket.staff.name }
+
+		div
+			div created_at #{ticket.created_at}
+			div updated_at #{ticket.updated_at}
+
+		
+		div[class="actions"]
+			div = link_to "reply" 
+			div = link_to "view", ticket_show_path(ticket.token)
+

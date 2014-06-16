@@ -1,0 +1,32 @@
+Each ticket should be assigned a status: Waiting for Staff Response, Waiting
+for Customer, On Hold, Cancelled or Completed - status(-es) may wish to 
+be added in the future.
+
+Можно прояснить, что означает каждый из них:
+
+- Waiting for Staff Response - тикет создается или изменяется кастомером, и ждет пока поступит ответ от стафа?
+- Waiting for Customer - стаф ответил на последний пост кастомера, ожидается очередной пост кастомера?
+- On Hold - режим ожидания? не прозрачно?
+- Cancelled - тикет отменен пользователем?
+- Completed - тикет помечен пользователем, как отработанный?
+
+Логично, что: 
+- статусы Waiting for Staff Response, Waiting for Customer устанавливаются автоматически логикой программы.
+- статус On Hold - устанавливается стафом.
+- статусы Cancelled, Completed - в ручную пользователем.
+
+В то же время, в задании говориться, что стаф может менять статус тикет. Как это согласуется с выше указаной логикой?
+
+Кроме того, в задании указаны такие разделы меню: 
+
+- New unassigned tickets - тикеты для которых не назначен отрабатывающий их стаф?
+- Open Tickets - тикеты со статусом Waiting for Staff Response или Waiting for Customer?
+- On hold tickets - тикеты со статусом On Hold?
+- Closed Tickets - тикеты со статусом Cancelled или Completed?
+
+Еще есть фраза `...add possibility for staff members to change department`.
+Что это значит? 
+- Возможность Стаф мэмбэру менять установленный кастомером департамент для тикета (ну например кастомер не совсем по правильно определился с департаментом)?
+- Или возможность стафа фактический переводить себя из департамента в департамент? Как-то не очень логично позволять это делать.
+
+Спасибо.

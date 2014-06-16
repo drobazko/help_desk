@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
-  before_filter :load_ticket, only: [:show, :edit, :update]
   before_filter :authenticate_staff!, only: [:index]
+  before_filter :load_ticket, only: [:show, :edit, :update]
 
   def index
     @tickets = Ticket.all
@@ -17,12 +17,11 @@ class TicketsController < ApplicationController
   def create
     @ticket = Ticket.new(ticket_params)
 
-    @ticket.init_sp(ticket_show_path(Ticket.generate_id), request)
-
-    @ticket.errors.add(:base, "Are You Spammer?") if @ticket.spam?
+    #@ticket.init_sp(ticket_show_path(Ticket.generate_id), request)
+    #@ticket.errors.add(:base, "Are You Spammer?") if @ticket.spam?
     
     if @ticket.errors.empty? and @ticket.save
-      TicketMailer.receive_confirmation(@ticket).deliver
+      #TicketMailer.receive_confirmation(@ticket).deliver
       redirect_to ticket_show_path(@ticket.token), notice: "Ticket created successfully. Message sent."
     else
       render "new"
@@ -30,6 +29,8 @@ class TicketsController < ApplicationController
   end
 
   def show
+    @post = Post.new
+    @post.pictures.build
   end
 
   def edit
@@ -48,9 +49,11 @@ class TicketsController < ApplicationController
   def load_ticket
     @ticket = Ticket.find_by_token(params[:token])    
     @pictures = @ticket.pictures.any? ? @ticket.pictures.clone : Picture.none
+    @staff = current_staff || Staff.find_by_email(@ticket.customer_email)
   end
 
   def ticket_params
     params.require(:ticket).permit(:customer_name, :customer_email, :subject, :body, :department_id, pictures_attributes: [:content])
   end
+
 end

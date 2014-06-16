@@ -1,16 +1,10 @@
 - content_for :admin_list do
-  = form_for(@staff, :url => { :action => "update_password" } ) do |f|
-    div[class="field"]
-      div
-        = f.label :password, "New Password"
-      div
-        = f.password_field :password, :autocomplete => "off" 
+  h1 Change Password
 
-    div[class="field"]
-      div
-        = f.label :password_confirmation, "New Password Confirmation"
-      div
-        = f.password_field :password_confirmation
+  = form_for(@staff, :url => { :action => "update_password" } ) do |f|
+    = render partial: 'shared/errors', locals: {entity: @staff}  
+
+    = render partial: 'password_fields', locals: {f: f}
 
     div[class="action_container"]
       = f.submit

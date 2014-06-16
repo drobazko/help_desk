@@ -1,7 +1,8 @@
 - unless picture.new_record?
 	div[id="edit_picture_#{picture.id}"]
 		div
-			= image_tag(picture.content.thumb, :size => '200x200')
+			= link_to "#lightbox", class:'lb', data: {toggle: 'lightbox'} do
+				= image_tag(picture.imageable.class.eql?(Post) ? picture.content.thumb_small : picture.content.thumb)
 
 		div 
 			= link_to 'delete', picture_path(picture), method: :delete, data: {remote: true, confirm: "Are you sure?"}

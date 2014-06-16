@@ -11,16 +11,20 @@ Rails.application.routes.draw do
 
   devise_for :staffs
 
-  resource :staff, only: [:edit] do
+  resource :staff, only: [:edit, :new] do
     collection do
       patch 'update_password'
+      patch 'create_member'
       get 'list'
     end
   end 
 
-  resources :staffs do
+  concern :postable do
     resources :posts
   end
+
+  resources :staffs, concerns: :postable
+  resources :users, concerns: :postable
 
   resources :tickets, only: [:index, :new, :create]
   resources :pictures

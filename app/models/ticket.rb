@@ -33,7 +33,16 @@ class Ticket < ActiveRecord::Base
 	end
 
 	after_save do
-		User.find_or_create_by(email: self.customer_email)
+		unless Staff.exists?(email: self.customer_email)
+			staff = Staff.new(
+				name: self.customer_name, 
+				email: self.customer_email, 
+				password: '12345678', 
+				password_confirmation: '12345678',
+				role: 'customer'
+			)
+			staff.save
+		end
 	end
 
 	scope :unassigned, -> { where(staff_id: nil) }
