@@ -18,10 +18,10 @@
 
 
 $(function() {
-	//var faye = new Faye.Client('http://localhost:9292/faye');
-	//faye.subscribe('/messages/new', function (data) {
-	//	eval(data);
-	//});	
+	var faye = new Faye.Client('http://localhost:9292/faye');
+	faye.subscribe('/posts/new', function (data) {
+		eval(data);
+	});	
 
 	$('#token').autocomplete({
 		serviceUrl:'/tickets/suggestions',

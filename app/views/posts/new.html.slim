@@ -6,8 +6,12 @@
 	div
 		= render partial: '/shared/errors', locals: {entity: @post}
 
-	= render partial: 'post_form', locals: {remote: false, ticket: @ticket, post: @post}
+	div[class="send-status"]
+
+	= render partial: 'post_form', locals: {remote: true, ticket: @ticket, post: @post}
 
 	div[class="voffset4"]
+
+	= render 'posts_block'
 		
 = render :template => 'layouts/admin_layout'

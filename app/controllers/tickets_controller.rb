@@ -5,7 +5,7 @@ class TicketsController < ApplicationController
   before_filter :test
 
   def index
-    @tickets = Ticket.with_department(current_staff).send(params[:section])
+    @tickets = Ticket.with_department(current_staff).send(params[:section]).order(updated_at: :desc)
   end
 
   def broadcast
@@ -23,7 +23,7 @@ class TicketsController < ApplicationController
     #@ticket.errors.add(:base, "Are You Spammer?") if @ticket.spam?
     
     if @ticket.errors.empty? and @ticket.save
-      #TicketMailer.receive_confirmation(@ticket).deliver
+      TicketMailer.receive_confirmation(@ticket).deliver
       redirect_to show_tickets_path(@ticket.token), notice: "Ticket created successfully. Message sent."
     else
       render "new"

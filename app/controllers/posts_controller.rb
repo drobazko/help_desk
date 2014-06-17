@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
 	def new
 		@ticket = Ticket.find(params[:ticket_id])
+		@posts = @ticket.posts.order(updated_at: :desc)
 		@post = Post.new
 		@post.pictures.build
 	end	
@@ -23,15 +24,7 @@ class PostsController < ApplicationController
 		@post.staff = @ticket.staff
 		@post.ticket = @ticket
 		
-		respond_to do |format|
-			if @post.save
-				format.html { redirect_to(ticket_posts_path(@ticket), notice: "The Post was Created") }
-				format.js
-			else
-				format.html
-				format.js
-			end
-		end
+		TicketMailer.new_reply(@post).deliver if @post.save
 	end
 
 	def update

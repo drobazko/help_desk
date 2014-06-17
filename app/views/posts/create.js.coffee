@@ -1,2 +1,4 @@
-$('.no-posts').remove();
-$('.posts').prepend('<%=j render @post %>').fadeIn('slow');
+<% broadcast 'posts/new' do %>
+alert('aaaa');
+<% end %>
+
