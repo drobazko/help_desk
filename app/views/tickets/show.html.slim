@@ -1,76 +1,22 @@
 div[class="span12"]
-	h1[class="clear"] Ticket Id #{@ticket.token}
+	= render 'ticket_short_info'
 
-	div[class="ticket-info clear"]
-		div
-			div[class="bold"] Status
-			div #{@ticket.status.title}
-
-		div
-			div[class="bold"] Customer
-			div #{@ticket.customer_name} (#{@ticket.customer_email})
-
-		div
-			div[class="bold"] Subject
-			div #{@ticket.subject}
-
-		div
-			div[class="bold"] Body
-			div #{@ticket.body}
-
-		- if @ticket.staff
-			div
-				div[class="bold"] Staff
-				div #{@ticket.staff} = "(#{@ticket.department.title})" if @ticket.department
-
-		div
-			div[class="bold"] Created At
-			div #{@ticket.created_at}
-
-		- unless @ticket.created_at === @ticket.updated_at
-			div
-				div[class="bold"] Updated At
-				div #{@ticket.updated_at}
-
-	div[class="pictures clear-float voffset4"]
-		= render(partial: @ticket.pictures)
-
-	div[class="voffset4 action-buttons clear clear-float"]
-		- unless current_staff
+	- unless current_staff
+		div[class="voffset4 action-buttons clear clear-float"]
 			div
 				#{link_to "New Ticket", new_ticket_path, class: 'btn btn-primary', type: 'button'}
 
 			div
-				#{link_to "Edit Ticket", ticket_edit_path(@ticket.token), class: 'btn btn-primary', type: 'button'}
+				#{link_to "Edit Ticket", edit_tickets_path(@ticket.token), class: 'btn btn-primary', type: 'button'}
 
 	div[class="border-row voffset4"]
 
-	div	
-		= form_for [@staff, @post], remote: true, html: {multipart: :true} do |f|
-			= token_tag form_authenticity_token
-			= hidden_field_tag 'ticket_token', "#{@ticket.token}"
-
-			div[class="voffset4"]
-				div
-					= f.text_area(:body, size: '16x4', value: "Comment") 
-				div
-				  	= f.fields_for :pictures, Picture.new, remote: true do |p|
-
-					    div
-					       /= p.label :content, "ScreenShots"
-					       = p.file_field :content
-					       /, :multiple => true, name: "pictures[content][]"
-
-				div
-					= f.submit "Post ", class: 'btn btn-primary', type: 'submit'
-
+	= render partial: '/posts/post_form', locals: {remote: true, ticket: @ticket, post: @post}
 
 	div[class="clear voffset4"]
 		div[class="bold"] Answers
 		div[class="voffset4 posts"]
-			- if @ticket.posts.any?
-			  	= render @ticket.posts.order(updated_at: :desc)
+			- if @posts.any?
+			  	= render @posts
 			- else  
 			  	p[class="no-posts"] There are no answers available
-
-

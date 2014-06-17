@@ -1,10 +1,7 @@
 - content_for :admin_list do
 	h1 Manage Members
-	div
-		button[type="button" class="btn btn-primary" data-toggle="button"] 
-			| New Member
 
-	div[class="voffset4"]
+	div[class="voffset4 clear"]
 		= render(partial: @staffs, spacer_template: "shared/spacer") || "There are no staffs yet"
 
 = render :template => 'layouts/admin_layout'

@@ -9,6 +9,14 @@ html
 
 		= csrf_meta_tags
 	body
+		div[class="clear-float hide-me ajax-loader"]
+			div[class="to-left"]
+				= image_tag "ajax-loader.gif"			
+			
+			div[class="to-left loading"]
+				| loading...
+		</div>
+		
 		header[class="nav-bar"]
 			h1 Help Desk App
 		div[class="container"]

@@ -5,7 +5,10 @@ class Staff < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :tickets
+  has_one :taken_tickets, :class_name => 'Ticket', :foreign_key => 'taken_staff_id'
+
   has_many :posts
+
 
   belongs_to :department
 
@@ -16,5 +19,12 @@ class Staff < ActiveRecord::Base
   def admin?
     role == 'admin'
   end
+
+  def customer?
+    role == 'customer'
+  end
+
+  scope :not_customer, -> { where.not(role: :customer) }
+  scope :not_admin, -> { where.not(role: :admin) }
 end
 

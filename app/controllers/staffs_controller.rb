@@ -2,6 +2,11 @@ class StaffsController < ApplicationController
 	before_filter :authenticate_staff!
 	before_filter :authorize_admin!, except: [:edit, :update_password]
 
+	def index
+		@staffs = Staff.not_customer.not_admin
+		@dpts = Department.all.map{|v| [v.title, v.id]}
+	end
+
 	def new
 		@staff = Staff.new
 	end
@@ -20,10 +25,6 @@ class StaffsController < ApplicationController
 		@staff = current_staff
 	end
 
-	def list
-		@staffs = Staff.all
-	end
-
 	def update_password
 		@staff = Staff.find(current_staff.id)
 		if @staff.update(staff_params)
@@ -34,10 +35,16 @@ class StaffsController < ApplicationController
 		end
 	end
 
+	def update
+		@staff = Staff.find(params[:id])
+		@staff.update(staff_params)
+		render nothing: true
+	end
+
 	private
 
 	def staff_params
-		params.required(:staff).permit(:name, :email, :password, :password_confirmation)
+		params.required(:staff).permit(:name, :email, :password, :password_confirmation, :only_department, :department_id)
 	end
 
 end

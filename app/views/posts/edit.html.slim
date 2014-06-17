@@ -1,19 +1,14 @@
 - content_for :admin_list do
 	h1 Edit Post
 
-	= form_for [@owner, @post] do |f|
-		= render partial: 'shared/errors', locals: {entity: @post}	
+	h3 -> Ticket #{@ticket.token}
 
-		div
-			div
-				= f.label :body, "Post Body:"
-			div
-				= f.text_area(:body, size: '100x6', class: 'field span12') 
+	div[class="pictures clear-float voffset4"]
+		= render(partial: @post.pictures)
 
-		div
-			= f.submit "Update the Post", class: 'btn btn-primary'
+	= render partial: '/posts/post_form', locals: {remote: false, ticket: @ticket, post: @post}
 
 	div
-		= link_to "List of Posts", staff_posts_path(@owner.id)
+		= link_to "List of Ticket Posts", ticket_posts_path(@ticket)
 
 = render :template => 'layouts/admin_layout'

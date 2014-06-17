@@ -24,13 +24,28 @@ $(function() {
 	//});	
 
 	$('#token').autocomplete({
-		serviceUrl:'tickets/suggestions',
+		serviceUrl:'/tickets/suggestions',
 		onSelect: function(value, data){ 
 			$("#sugg_form input").remove();
-			$("#sugg_form").attr('action', 'tickets/' + value).submit();
+			$("#sugg_form").attr('action', 'tickets/token/' + value).submit();
 		}
-	}
+	});
 
-	);
+    $('.actions a, .pictures a, .new_post, .edit_staff')
+        .on('ajax:before', function(){
+            $('.ajax-loader').show();
+        })
+        .on('ajax:success', function(data, status, xhr) {
+            $('.ajax-loader').hide();
+        })
+        .on('ajax:failure', function(xhr, status, error) {
+        })
+        .on('ajax:complete', function() {
+            $('.ajax-loader').hide();
+        });
 
+
+    $(".edit_staff input, .edit_staff select").on("change", function(){
+        $(this).closest('form').submit();
+    });
 });

@@ -1,6 +1,7 @@
 div
 	= form_tag nil, id: "sugg_form", method: :get
 		= text_field_tag :token, params[:token], placeholder: "OAZ-217-YMH-824-PIO"
+
 div[class="menu to-left span3"]
 	nav
 		ul
@@ -9,16 +10,19 @@ div[class="menu to-left span3"]
 					= link_to v, tickets_path(:section => k)
 
 			li
-				= link_to "Manage Members", list_staff_path
-
-			li
 				= link_to "Change Password", edit_staff_path
 
-			li
-				= link_to "Create a Member", new_staff_path
+			- if current_staff.admin?
+				li
+					= link_to "Manage Members", staffs_path
+				li
+					= link_to "Create a Member", new_staff_path
 
 			li
-				= link_to "Full Text Search", ticket_search_form_path
+				= link_to "Full Text Search", search_form_tickets_path
+
+			li
+				= link_to "History", histories_path
 
 
 div[class="to-left span9"]

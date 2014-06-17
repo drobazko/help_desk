@@ -40,9 +40,6 @@ Staff.create!(
 )
 
 
-# Customers
-staff = Staff.new(name: Faker::Name.name, email: "drobazko@gmail.com", password: '12345678', password_confirmation: '12345678')
-
 1.upto(customers_quantity){|i| 
 	staff = Staff.new(
 		name: Faker::Name.name, 
@@ -68,8 +65,10 @@ staff = Staff.new(name: Faker::Name.name, email: "drobazko@gmail.com", password:
 		name: Faker::Name.name, 
 		email: "member_#{i}@helpdesk.com", 
 		password: '12345678', 
-		password_confirmation: '12345678'
+		password_confirmation: '12345678',
 	)
+
+	staff.department = Department.find(rand(1..departments_quantity))
 
 	1.upto(posts_quantity){|j| staff.posts.new(
 		body: "It's Simple Sample Stuff ##{i} Post ##{j}. #{Faker::Lorem.paragraph} Enjoy It!",

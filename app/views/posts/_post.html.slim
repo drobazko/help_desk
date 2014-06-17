@@ -1,24 +1,27 @@
 div
-	= form_for [post.staff, post]
+	= form_for [post.ticket, post]
 		div
+			div	
+				div[class="bold"] 
+					to ticket -> #{link_to post.ticket.token, show_tickets_path(post.ticket.token)}
+
 			div	
 				div = post.body
 
 			div
 				div created_at #{post.created_at}
 				div updated_at #{post.updated_at}
-			div 
-				| by #{ post.staff.name }
+				
+			- if post.staff 
+				div 
+					| created by #{ post.staff.name }
 
 			div[class="pictures clear-float"]
 				= render(partial: post.pictures)
-		
 			
 		div[class="actions"]
-			div = link_to "[edit]", edit_staff_post_path(post.staff.id, post.id)
-			#{can? :destroy, post}
-			= debug [post.staff_id, current_staff]
+			div = link_to "[edit post]", edit_ticket_post_path(post.ticket.id, post.id)
 
-			- if can? :destroy, post
-				div = link_to "[delete post]", staff_post_path(post.staff.id, post.id), method: :delete, data: { confirm: 'Are you sure?', remote: true }
+			- if !current_staff or can?(:destroy, post)
+				div = link_to "[delete post]", ticket_post_path(post.ticket.id, post.id), method: :delete, data: { confirm: 'Are you sure?', remote: true }
 

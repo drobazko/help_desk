@@ -2,32 +2,42 @@ class PostsController < ApplicationController
 	before_filter :load_data, only: [:update, :destroy, :edit]
 
 	def index
-		@staff = Staff.find(params[:staff_id])
-		@posts = @staff.posts.order(updated_at: :desc)
+		@ticket = Ticket.find(params[:ticket_id])
+		@posts = @ticket.posts.order(updated_at: :desc)
 	end
 
 	def new
+		@ticket = Ticket.find(params[:ticket_id])
+		@post = Post.new
+		@post.pictures.build
 	end	
 
 	def edit
-	end	
+		@post = Post.find(params[:id])
+		@ticket = Ticket.find(params[:ticket_id]) 
+	end
 
 	def create
 		@post = Post.new(post_params)
-		@post.staff = Staff.find(params[:staff_id])
-		@ticket = Ticket.find_by_token(params[:ticket_token])
-		@post[:ticket_id] = @ticket.id
-		@post.save
-
+		@ticket = Ticket.find(params[:ticket_id]) 
+		@post.staff = @ticket.staff
+		@post.ticket = @ticket
+		
 		respond_to do |format|
-			format.js
+			if @post.save
+				format.html { redirect_to(ticket_posts_path(@ticket), notice: "The Post was Created") }
+				format.js
+			else
+				format.html
+				format.js
+			end
 		end
-
 	end
 
 	def update
+		@ticket = Ticket.find(params[:ticket_id]) 
 		if @post.update(post_params)
-			redirect_to edit_staff_post_path(@staff, @post), notice: "The Post was updated"
+			redirect_to ticket_posts_path(@ticket), notice: "The Post was updated"
 		else
 			render 'edit'
 		end
@@ -41,6 +51,9 @@ class PostsController < ApplicationController
 			format.js
 		end
 	end
+
+	def for_ticket
+	end	
 
 	private
 

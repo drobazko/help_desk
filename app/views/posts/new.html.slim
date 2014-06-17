@@ -1,0 +1,13 @@
+- content_for :admin_list do
+	h1 New Post For
+
+	= render '/tickets/ticket_short_info'
+
+	div
+		= render partial: '/shared/errors', locals: {entity: @post}
+
+	= render partial: 'post_form', locals: {remote: false, ticket: @ticket, post: @post}
+
+	div[class="voffset4"]
+		
+= render :template => 'layouts/admin_layout'

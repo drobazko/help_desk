@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140615193124) do
+ActiveRecord::Schema.define(version: 20140617164002) do
 
   create_table "departments", force: true do |t|
     t.string   "title",      null: false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20140615193124) do
   end
 
   create_table "histories", force: true do |t|
-    t.string   "body"
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "ticket_id"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20140615193124) do
     t.string   "role",                   default: "member", null: false
     t.string   "name"
     t.integer  "department_id"
+    t.integer  "only_department",        default: 0
   end
 
   add_index "staffs", ["department_id"], name: "index_staffs_on_department_id", using: :btree
@@ -92,11 +93,13 @@ ActiveRecord::Schema.define(version: 20140615193124) do
     t.integer  "department_id"
     t.integer  "status_id"
     t.integer  "staff_id"
+    t.integer  "taken_staff_id"
   end
 
   add_index "tickets", ["department_id"], name: "index_tickets_on_department_id", using: :btree
   add_index "tickets", ["staff_id"], name: "index_tickets_on_staff_id", using: :btree
   add_index "tickets", ["status_id"], name: "index_tickets_on_status_id", using: :btree
+  add_index "tickets", ["taken_staff_id"], name: "index_tickets_on_taken_staff_id", using: :btree
   add_index "tickets", ["token"], name: "index_tickets_on_token", unique: true, using: :btree
 
 end

@@ -1,12 +1,11 @@
 class TicketsController < ApplicationController
-  before_filter :authenticate_staff!, :set_section_type, only: [:index]
+  before_filter :authenticate_staff!, only: [:index, :suggestions, :search_form, :search]
+  before_filter :set_section_type
   before_filter :load_ticket, only: [:show, :edit, :update]
+  before_filter :test
 
   def index
     @tickets = Ticket.with_department(current_staff).send(params[:section])
-    #@tickets = Ticket.closed
-    
-
   end
 
   def broadcast
@@ -25,7 +24,7 @@ class TicketsController < ApplicationController
     
     if @ticket.errors.empty? and @ticket.save
       #TicketMailer.receive_confirmation(@ticket).deliver
-      redirect_to ticket_show_path(@ticket.token), notice: "Ticket created successfully. Message sent."
+      redirect_to show_tickets_path(@ticket.token), notice: "Ticket created successfully. Message sent."
     else
       render "new"
     end
@@ -34,6 +33,7 @@ class TicketsController < ApplicationController
   def show
     @post = Post.new
     @post.pictures.build
+    @posts = @ticket.posts.order(updated_at: :desc)
   end
 
   def edit
@@ -42,10 +42,16 @@ class TicketsController < ApplicationController
 
   def update
     if @ticket.update(ticket_params)
-      redirect_to ticket_show_path(@ticket.token), notice: "The Ticket was updated"
+      redirect_to show_tickets_path(@ticket.token), notice: "The Ticket was updated"
     else
       render 'edit'
     end
+  end
+
+  def take
+    @ticket = Ticket.find(params[:id])
+    @ticket.taken_tickets = current_staff
+    @ticket.save
   end
 
   def suggestions
@@ -72,13 +78,13 @@ class TicketsController < ApplicationController
   end
 
   def search
-    @tickets = Ticket.search(params[:query])
+    @tickets = params[:query].present? ? Ticket.search(params[:query]) : Ticket.none
     render 'search_form'
   end
 
   private
     def load_ticket
-      @ticket = Ticket.find_by_token(params[:token])    
+      @ticket = Ticket.find_by_token(params[:token] || params[:id])    
       @pictures = @ticket.pictures.any? ? @ticket.pictures.clone : Picture.none
       @staff = current_staff || Staff.find_by_email(@ticket.customer_email)
     end
@@ -89,6 +95,11 @@ class TicketsController < ApplicationController
 
     def set_section_type
       params[:section] ||= "unassigned"
+    end
+
+    def test
+      false
+      
     end
     
 end

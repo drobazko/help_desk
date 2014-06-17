@@ -9,10 +9,11 @@ class Ticket < ActiveRecord::Base
 	}
 	
 	has_many :pictures, as: :imageable
-	has_many :posts
+	has_many :posts	
 	has_many :histories
 	belongs_to :status
 	belongs_to :staff
+	belongs_to :taken_tickets, :class_name => 'Staff', :foreign_key => 'taken_staff_id'
 	belongs_to :department
 
 	accepts_nested_attributes_for :pictures
@@ -36,26 +37,29 @@ class Ticket < ActiveRecord::Base
 	end	
 
 	before_save do
-		self.status_id = Status.first.id
-	end
+		s = Staff.find_by_email(customer_email)
 
-	after_save do
-		unless Staff.exists?(email: self.customer_email)
-			staff = Staff.new(
+		unless s
+			pass = "q2s3d4f5f5g6g6"
+
+			s = Staff.new(
 				name: self.customer_name, 
 				email: self.customer_email, 
-				password: '12345678', 
-				password_confirmation: '12345678',
+				password: pass, 
+				password_confirmation: pass,
 				role: 'customer'
 			)
-			staff.save
+			s.save
 		end
+
+		self.status = Status.first
+		self.staff = s
 	end
 
-	scope :with_department, ->(staff) { staff.department_id ? where(department_id: staff.department_id ) : all }
-	scope :unassigned, -> { where(staff_id: nil) }
+	scope :with_department, ->(staff) { staff.department_id ? where(department_id: staff.department_id) : all }
+	scope :unassigned, -> { where(taken_staff_id: nil) }
 	scope :on_hold, -> { joins(:status).where("statuses.short_title in ('on_hold')") }
-	scope :opened, -> { joins(:status).where("statuses.short_title in ('opened')") }
+	scope :opened, -> { joins(:status).where("staff_id is not null and statuses.short_title not in ('on_hold', 'cancelled', 'completed')") }
 	scope :closed, -> { joins(:status).where("statuses.short_title in ('cancelled', 'completed')") }
 
 end
