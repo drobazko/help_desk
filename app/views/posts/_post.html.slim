@@ -20,8 +20,8 @@ div
 				= render(partial: post.pictures)
 			
 		div[class="actions"]
-			div = link_to "[edit post]", edit_ticket_post_path(post.ticket.id, post.id)
+			- if current_staff and can?(:manage, post)
+				div = link_to "[edit post]", edit_ticket_post_path(post.ticket.id, post.id)
 
-			- if !current_staff or can?(:destroy, post)
 				div = link_to "[delete post]", ticket_post_path(post.ticket.id, post.id), method: :delete, data: { confirm: 'Are you sure?', remote: true }
 

@@ -20,13 +20,16 @@
 $(function() {
 	var faye = new Faye.Client('http://localhost:9292/faye');
 	faye.subscribe('/posts/new', function (data) {
-		eval(data);
+    	eval(data);
 	});	
+
+    $(".remotable").on("change", function(){
+        $(this).closest('form').submit();
+    });
 
 	$('#token').autocomplete({
 		serviceUrl:'/tickets/suggestions',
 		onSelect: function(value, data){ 
-			$("#sugg_form input").remove();
 			$("#sugg_form").attr('action', 'tickets/token/' + value).submit();
 		}
 	});
@@ -45,7 +48,5 @@ $(function() {
         });
 
 
-    $(".edit_staff input, .edit_staff select").on("change", function(){
-        $(this).closest('form').submit();
-    });
+
 });

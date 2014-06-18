@@ -3,4 +3,7 @@
 	div[class="voffset4"]
 		= render(partial: @tickets, spacer_template: "shared/spacer") || "There are no tickets for this staff member yet"
 
+	div[class="voffset4"]
+		= paginate @tickets
+
 = render :template => 'layouts/admin_layout'

@@ -8,12 +8,10 @@ class Ability
        if staff.admin?
          can :manage, :all
        else
-         #can :read, :all
-         #can :read, Post, :staff_id => staff.id
-        can :manage, Post do |u|
-            u.id == staff.id
+        can :manage, Post, :staff_id => staff.id
+        can :manage, Picture do |pic|
+           pic.imageable.staff_id == staff.id
         end
-
        end
     #
     # The first argument to `can` is the action you are giving the user 

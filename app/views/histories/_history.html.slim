@@ -1,0 +1,8 @@
+div[class="voffset4"]
+	div
+		= history.body.html_safe
+	div
+		to ticket #{link_to history.ticket.token, show_tickets_path(history.ticket.token)}
+	div
+		created_at #{history.created_at}
+

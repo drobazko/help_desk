@@ -4,5 +4,6 @@
 			= link_to picture.content.to_s do
 				= image_tag(picture.imageable.class.eql?(Post) ? picture.content.thumb_small : picture.content.thumb)
 
-			div 
-				= link_to '[delete image]', picture_path(picture), method: :delete, data: {remote: true, confirm: "Are you sure?"}
+			- if current_staff and can?(:manage, picture)
+				div 
+					= link_to '[delete image]', picture_path(picture), method: :delete, data: {remote: true, confirm: "Are you sure?"}

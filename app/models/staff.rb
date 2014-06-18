@@ -24,6 +24,10 @@ class Staff < ActiveRecord::Base
     role == 'customer'
   end
 
+  def member?
+    role == 'member'
+  end
+
   scope :not_customer, -> { where.not(role: :customer) }
   scope :not_admin, -> { where.not(role: :admin) }
 end

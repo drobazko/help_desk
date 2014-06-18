@@ -1,11 +1,14 @@
 class TicketsController < ApplicationController
-  before_filter :authenticate_staff!, only: [:index, :suggestions, :search_form, :search]
+  before_filter :authenticate_staff!, only: [:index, :suggestions, :search_form, :search, :take, :change_status]
   before_filter :set_section_type
-  before_filter :load_ticket, only: [:show, :edit, :update]
-  before_filter :test
+  before_filter :load_ticket, only: [:show, :edit, :update, :change_status]
 
   def index
-    @tickets = Ticket.with_department(current_staff).send(params[:section]).order(updated_at: :desc)
+    @tickets = Ticket
+      .with_department(current_staff)
+      .send(params[:section])
+      .order(updated_at: :desc)
+      .page(params[:page])
   end
 
   def broadcast
@@ -19,8 +22,8 @@ class TicketsController < ApplicationController
   def create
     @ticket = Ticket.new(ticket_params)
 
-    #@ticket.init_sp(ticket_show_path(Ticket.generate_id), request)
-    #@ticket.errors.add(:base, "Are You Spammer?") if @ticket.spam?
+    @ticket.init_sp(ticket_show_path(Ticket.generate_id), request)
+    @ticket.errors.add(:base, "Are You Spammer?") if @ticket.spam?
     
     if @ticket.errors.empty? and @ticket.save
       TicketMailer.receive_confirmation(@ticket).deliver
@@ -82,6 +85,12 @@ class TicketsController < ApplicationController
     render 'search_form'
   end
 
+  def change_status
+    @ticket.status = Status.find(params[:ticket][:status_id])
+    @ticket.save
+    render nothing: true
+  end
+
   private
     def load_ticket
       @ticket = Ticket.find_by_token(params[:token] || params[:id])    
@@ -90,16 +99,10 @@ class TicketsController < ApplicationController
     end
 
     def ticket_params
-      params.require(:ticket).permit(:customer_name, :customer_email, :subject, :body, :department_id, pictures_attributes: [:content])
+      params.require(:ticket).permit(:customer_name, :customer_email, :subject, :body, :department_id, :status_id, pictures_attributes: [:content])
     end
 
     def set_section_type
       params[:section] ||= "unassigned"
     end
-
-    def test
-      false
-      
-    end
-    
 end

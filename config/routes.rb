@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   resources :tickets do
     member do
-      get 'take'
+      get :take
     end
 
     collection do
@@ -29,11 +29,11 @@ Rails.application.routes.draw do
       get '/token/:token', action: :show, as: :show
       put '/token/:token/update', action: :update, as: :update
       get '/token/:token/edit', action: :edit, as: :edit
-
+      put '/:token/change_status', action: :change_status, as: :change_status
     end
     resources :posts     
   end
 
-  resources :pictures
+  resources :pictures, only: [:destroy]
   resources :histories, only: [:index]
 end

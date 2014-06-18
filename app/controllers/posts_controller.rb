@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+	before_filter :authenticate_staff!, only: [:destroy]
 	before_filter :load_data, only: [:update, :destroy, :edit]
 
 	def index
@@ -21,9 +22,10 @@ class PostsController < ApplicationController
 	def create
 		@post = Post.new(post_params)
 		@ticket = Ticket.find(params[:ticket_id]) 
-		@post.staff = @ticket.staff
+		@post.staff = current_staff ? current_staff : @ticket.staff
 		@post.ticket = @ticket
 		
+		#@post.save
 		TicketMailer.new_reply(@post).deliver if @post.save
 	end
 
@@ -44,9 +46,6 @@ class PostsController < ApplicationController
 			format.js
 		end
 	end
-
-	def for_ticket
-	end	
 
 	private
 
