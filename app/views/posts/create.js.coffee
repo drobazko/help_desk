@@ -1,5 +1,13 @@
-$('.no-posts').remove();
-$('.posts').prepend('<%=j render @post %>').fadeIn('slow');
-<% broadcast 'posts/new' do %>
-	$('.user-win .posts').prepend('<%=j render @post %>').fadeIn('slow');
+<% broadcast '/posts/new' do %>
+	$('.ticket-<%= @ticket.token %> .no-posts').remove();
+	$('<div class="drob"></div>')
+	.css({'backgroundColor' : '#ff9f5f'})
+	.prependTo('.ticket-<%= @ticket.token %> .posts')
+	.hide()
+	.append('<%=j render @post %>')
+	.fadeIn('slow')
+	.css({transition: 'background-color 3s ease-in-out', "background-color": "white"});
+	
+	
+	
 <% end %>

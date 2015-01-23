@@ -49,3 +49,4 @@ gem 'jdbc-mysql', '5.1.28', :platform => :jruby
 gem 'thinking-sphinx', '~> 3.1.0'
 gem 'remotipart', '~> 1.2'
 gem 'kaminari'
+gem 'thin'

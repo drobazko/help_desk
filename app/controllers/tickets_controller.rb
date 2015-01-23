@@ -22,7 +22,7 @@ class TicketsController < ApplicationController
   def create
     @ticket = Ticket.new(ticket_params)
 
-    @ticket.init_sp(ticket_show_path(Ticket.generate_id), request)
+    @ticket.init_sp(show_tickets_path(Ticket.generate_id), request)
     @ticket.errors.add(:base, "Are You Spammer?") if @ticket.spam?
     
     if @ticket.errors.empty? and @ticket.save

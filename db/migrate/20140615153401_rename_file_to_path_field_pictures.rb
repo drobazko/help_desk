@@ -1,5 +1,5 @@
 class RenameFileToPathFieldPictures < ActiveRecord::Migration
   def change
-  	rename_column :Pictures, :file, :path
+  	rename_column :pictures, :file, :path
   end
 end

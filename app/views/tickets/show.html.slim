@@ -1,16 +1,16 @@
 div[class="span12"]
-	= render 'ticket_short_info'
+  = render 'ticket_short_info'
 
-	- unless current_staff
-		div[class="voffset4 action-buttons clear clear-float"]
-			div
-				#{link_to "New Ticket", new_ticket_path, class: 'btn btn-primary', type: 'button'}
+  - unless current_staff
+    div[class="voffset4 action-buttons clear clear-float"]
+      div
+        = link_to "New Ticket", new_ticket_path, class: 'btn btn-primary', type: 'button'
 
-			div
-				#{link_to "Edit Ticket", edit_tickets_path(@ticket.token), class: 'btn btn-primary', type: 'button'}
+      div
+        = link_to "Edit Ticket", edit_tickets_path(@ticket.token), class: 'btn btn-primary', type: 'button'
 
-	div[class="border-row voffset4"]
+  div[class="border-row voffset4"]
 
-	= render partial: '/posts/post_form', locals: {remote: true, ticket: @ticket, post: @post}
+  = render partial: '/posts/post_form', locals: {remote: true, ticket: @ticket, post: @post}
 
-	= render '/posts/posts_block'
+  = render '/posts/posts_block'
