@@ -43,7 +43,6 @@ gem 'cancan'
 gem 'rakismet'
 gem 'carrierwave'
 gem 'rmagick', :require => false
-gem 'postmark-rails', '~> 0.5.0' 
 gem 'faker', '1.0.1'
 gem 'jdbc-mysql', '5.1.28', :platform => :jruby
 gem 'thinking-sphinx', '~> 3.1.0'
