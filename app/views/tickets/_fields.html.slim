@@ -34,8 +34,7 @@ div
   	= f.fields_for :pictures, Picture.new do |p|
 	    div
 	       = p.label :content, "ScreenShots"
-	       = p.file_field :content
-	       /, :multiple => true, name: "pictures[content][]"
+	       = p.file_field :content, :multiple => true, name: "pictures[content][]"
 
 /div
 /	= link_to 'broadcast', ticket_broadcast_path, remote: true
