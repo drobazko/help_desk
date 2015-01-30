@@ -13,7 +13,7 @@ class Staff < ActiveRecord::Base
   belongs_to :department
 
   def you
-  	"#{name} (#{email})"
+    "#{name} (#{email})"
   end
 
   def admin?

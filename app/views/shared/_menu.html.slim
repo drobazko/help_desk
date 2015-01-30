@@ -1,20 +1,20 @@
 nav
-	ul
-		- Ticket::SECTIONS.each do |k, v|
-			li 
-				= link_to v, tickets_path(:section => k)
+  ul
+    - Ticket::SECTIONS.each do |k, v|
+      li 
+        = link_to v, tickets_path(:section => k)
 
-		li
-			= link_to "Change Password", edit_staff_path
+    li
+      = link_to "Change Password", edit_staff_path
 
-		- if current_staff.admin?
-			li
-				= link_to "Manage Members", staffs_path
-			li
-				= link_to "Create a Member", new_staff_path
+    - if current_staff.admin?
+      li
+        = link_to "Manage Members", staffs_path
+      li
+        = link_to "Create a Member", new_staff_path
 
-		li
-			= link_to "Full Text Search", search_form_tickets_path
+    li
+      = link_to "Full Text Search", search_form_tickets_path
 
-		li
-			= link_to "History", histories_path
+    li
+      = link_to "History", histories_path

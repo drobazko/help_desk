@@ -1,7 +1,7 @@
 - content_for :admin_list do
-	h2 List of Posts
-	h3 Ticket: #{@ticket.token}
-	div[class="posts"]
-		= render(partial: @posts, spacer_template: "shared/spacer") || "There are no posts for this ticket yet"
+  h2 List of Posts
+  h3 Ticket: #{@ticket.token}
+  div[class="posts"]
+    = render(partial: @posts, spacer_template: "shared/spacer") || "There are no posts for this ticket yet"
 
 = render :template => 'layouts/admin_layout'

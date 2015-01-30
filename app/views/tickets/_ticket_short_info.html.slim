@@ -1,29 +1,29 @@
 h1[class="clear"] Ticket Id #{@ticket.token}
 
 div[class="ticket-info clear"]
-	div
-		div[class="bold"] Subject
-		div #{@ticket.subject}
+  div
+    div[class="bold"] Subject
+    div #{@ticket.subject}
 
-	div
-		div[class="bold"] Body
-		div #{@ticket.body}
+  div
+    div[class="bold"] Body
+    div #{@ticket.body}
 
-	div
-		div[class="bold"] Status
-		div #{@ticket.status.title}
+  div
+    div[class="bold"] Status
+    div #{@ticket.status.title}
 
-	div
-		div[class="bold"] Customer
-		div #{@ticket.customer_name} (#{@ticket.customer_email})
+  div
+    div[class="bold"] Customer
+    div #{@ticket.customer_name} (#{@ticket.customer_email})
 
-	div
-		div[class="bold"] Created At
-		div #{@ticket.created_at}
+  div
+    div[class="bold"] Created At
+    div #{@ticket.created_at}
 
-	div
-		div[class="bold"] Updated At
-		div #{@ticket.updated_at}
+  div
+    div[class="bold"] Updated At
+    div #{@ticket.updated_at}
 
 div[class="pictures clear-float voffset4"]
-	= render(partial: @ticket.pictures)
+  = render(partial: @ticket.pictures)

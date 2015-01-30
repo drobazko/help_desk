@@ -1,28 +1,28 @@
 -  q = params[:query] ? params[:query].split : []
 = form_for ticket, url: change_status_tickets_path(ticket.token), remote: true, method: :put do |f|
-	div[class="clear voffset4"]
-		div[class="bold"] = link_to highlight(ticket.subject, q), show_tickets_path(ticket.token)
-		div = highlight(ticket.body, q)
-		- if ticket.staff 
-			div 
-				| Staff Name: #{ ticket.staff.name }
+  div[class="clear voffset4"]
+    div[class="bold"] = link_to highlight(ticket.subject, q), show_tickets_path(ticket.token)
+    div = highlight(ticket.body, q)
+    - if ticket.staff 
+      div 
+        | Staff Name: #{ ticket.staff.name }
 
-		- if ticket.department 
-			div
-				| Department: #{ ticket.department.title }
+    - if ticket.department 
+      div
+        | Department: #{ ticket.department.title }
 
-		div
-			div created_at #{ticket.created_at}
-			div updated_at #{ticket.updated_at}
+    div
+      div created_at #{ticket.created_at}
+      div updated_at #{ticket.updated_at}
 
-		div Status: #{f.select(:status_id, statuses_for_select, { :selected => ticket.status.id }, class: "remotable", id: nil)}
+    div Status: #{f.select(:status_id, statuses_for_select, { :selected => ticket.status.id }, class: "remotable", id: nil)}
 
-		div[class="actions"]
-			div = link_to "[reply]", new_ticket_post_path(ticket)
-			div = link_to "[view]", show_tickets_path(ticket.token)
+    div[class="actions"]
+      div = link_to "[reply]", new_ticket_post_path(ticket)
+      div = link_to "[view]", show_tickets_path(ticket.token)
 
-			div[class="take"]
-				- unless ticket.taken_tickets
-					= link_to "[take]", take_ticket_path(ticket.id), remote: true
-				- else
-					| taken by #{ticket.taken_tickets.name}
+      div[class="take"]
+        - unless ticket.taken_tickets
+          = link_to "[take]", take_ticket_path(ticket.id), remote: true
+        - else
+          | taken by #{ticket.taken_tickets.name}

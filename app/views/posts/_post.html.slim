@@ -1,27 +1,27 @@
-div
-	= form_for [post.ticket, post]
-		div
-			div	
-				div[class="bold"] 
-					to ticket -> #{link_to post.ticket.token, show_tickets_path(post.ticket.token)}
+div[class="#{"highlight-me" if post.id.eql? params[:p].to_i}"]
+  = form_for [post.ticket, post]
+    div
+      div  
+        div[class="bold"] 
+          to ticket -> #{link_to post.ticket.token, show_tickets_path(post.ticket.token)}
 
-			div	
-				div = post.body
+      div  
+        div = post.body
 
-			div
-				div created_at #{post.created_at}
-				div updated_at #{post.updated_at}
-				
-			- if post.staff 
-				div 
-					| created by #{ post.staff.name }
+      div
+        div created_at #{post.created_at}
+        div updated_at #{post.updated_at}
+        
+      - if post.staff 
+        div 
+          | created by #{ post.staff.name }
 
-			div[class="pictures clear-float"]
-				= render(partial: post.pictures)
-			
-		div[class="actions"]
-			- if current_staff and can?(:manage, post)
-				div = link_to "[edit post]", edit_ticket_post_path(post.ticket.id, post.id)
+      div[class="pictures clear-float"]
+        = render(partial: post.pictures)
+      
+    div[class="actions"]
+      - if current_staff and can?(:manage, post)
+        div = link_to "[edit post]", edit_ticket_post_path(post.ticket.id, post.id)
 
-				div = link_to "[delete post]", ticket_post_path(post.ticket.id, post.id), method: :delete, data: { confirm: 'Are you sure?', remote: true }
+        div = link_to "[delete post]", ticket_post_path(post.ticket.id, post.id), method: :delete, data: { confirm: 'Are you sure?', remote: true }
 

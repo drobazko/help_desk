@@ -50,4 +50,5 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 
+  ActionMailer::Base.default from: 'drobazko.dev@gmail.com'
 end

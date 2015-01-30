@@ -4,16 +4,16 @@
   = form_for(@staff, method: :patch, :url => { :action => "create_member" } ) do |f|
     = render partial: 'shared/errors', locals: {entity: @staff}  
 
-	div
-		div
-			= f.label :name, "Name:"
-		div
-			= f.text_field :name
-	div
-		div
-			= f.label :email, "Email:"
-		div
-			= f.email_field :email, {:placeholder => 'user@domain.com'}
+  div
+    div
+      = f.label :name, "Name:"
+    div
+      = f.text_field :name
+  div
+    div
+      = f.label :email, "Email:"
+    div
+      = f.email_field :email, {:placeholder => 'user@domain.com'}
 
     
     = render partial: 'password_fields', locals: {f: f}

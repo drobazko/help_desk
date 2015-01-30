@@ -26,6 +26,8 @@ class TicketsController < ApplicationController
     @ticket.errors.add(:base, "Are You Spammer?") if @ticket.spam?
     
     if @ticket.errors.empty? and @ticket.save
+      save_images @ticket
+
       TicketMailer.receive_confirmation(@ticket).deliver
       redirect_to show_tickets_path(@ticket.token), notice: "Ticket created successfully. Message sent."
     else
@@ -45,6 +47,8 @@ class TicketsController < ApplicationController
 
   def update
     if @ticket.update(ticket_params)
+      save_images @ticket
+
       redirect_to show_tickets_path(@ticket.token), notice: "The Ticket was updated"
     else
       render 'edit'

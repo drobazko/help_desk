@@ -1,40 +1,38 @@
 = render partial: 'shared/errors', locals: {entity: @ticket}
 
 div
-	div
-		= f.label :customer_name, "Customer Name:"
-	div
-		= f.text_field :customer_name, value: "Alex Drobazko"
+  div
+    = f.label :customer_name, "Customer Name:"
+  div
+    = f.text_field :customer_name, value: "Alex Drobazko"
 div
-	div
-		= f.label :customer_email, "Customer Email:"
-	div
-		= f.email_field :customer_email, {:placeholder => 'user@domain.com', value: "drobazko@gmail.com"}
+  div
+    = f.label :customer_email, "Customer Email:"
+  div
+    = f.email_field :customer_email, {:placeholder => 'user@domain.com', value: "drobazko@gmail.com"}
 div
-	div
-		= f.label :subject, "Ticket Subject:"
-	div
-		= f.text_field :subject, value: "Sample Subject"
+  div
+    = f.label :subject, "Ticket Subject:"
+  div
+    = f.text_field :subject, value: "Sample Subject"
 
 div
-	div
-		= f.label :department_id, "Department:"
-	div
-		= f.select(:department_id, departments_for_select, { :include_blank => true, :selected => @ticket.department_id })
+  div
+    = f.label :department_id, "Department:"
+  div
+    = f.select(:department_id, departments_for_select, { :include_blank => true, :selected => @ticket.department_id })
 div
-	div
-		= f.label :body, "Ticket Body:"
-	div
-		= f.text_area(:body, size: '16x4', value: "Sample Body") 
+  div
+    = f.label :body, "Ticket Body:"
+  div
+    = f.text_area(:body, size: '16x4', value: "Sample Body") 
+
+div[class="pictures clear-float"]
+  = render @pictures if @pictures
 
 div
-	= render @pictures if @pictures
+  = f.fields_for :pictures, Picture.new do |p|
+    div
+       = p.label :content, "ScreenShots"
+       = p.file_field :content, multiple: true, name: "pictures[content][]"
 
-div
-  	= f.fields_for :pictures, Picture.new do |p|
-	    div
-	       = p.label :content, "ScreenShots"
-	       = p.file_field :content, :multiple => true, name: "pictures[content][]"
-
-/div
-/	= link_to 'broadcast', ticket_broadcast_path, remote: true

@@ -1,44 +1,44 @@
 doctype html
 html
-	head
-		title Help Desk App
+  head
+    title Help Desk App
 
-		= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-		= javascript_include_tag "application", "data-turbolinks-track" => true
-		= javascript_include_tag  "http://localhost:9292/faye.js"
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag  "http://localhost:9292/faye.js"
 
-		= csrf_meta_tags
-	body
-		div[class="clear-float hide-me ajax-loader"]
-			div[class="to-left"]
-				= image_tag "ajax-loader.gif"			
-			
-			div[class="to-left loading"]
-				| loading...
-		</div>
-		
-		header[class="nav-bar"]
-			h1 Help Desk App
-		div[class="container"]
-			div[class="row"]
-				div[class="span12 voffset4"]
-					div
-						p[class="notice"]
-					   		= notice
-						p[class="notice"]
-							= alert
-					div
-						- unless current_staff
-								= link_to 'Sign in', new_staff_session_path
-						- else
-							div
-								| You are #{current_staff.you}
-							div
-								= link_to 'Sign out', destroy_staff_session_path
+    = csrf_meta_tags
+  body
+    div[class="clear-float hide-me ajax-loader"]
+      div[class="to-left"]
+        = image_tag "ajax-loader.gif"      
+      
+      div[class="to-left loading"]
+        | loading...
+    </div>
+    
+    header[class="nav-bar"]
+      h1 Help Desk App
+    div[class="container"]
+      div[class="row"]
+        div[class="span12 voffset4"]
+          div
+            p[class="notice"]
+                 = notice
+            p[class="notice"]
+              = alert
+          div
+            - unless current_staff
+                = link_to 'Sign in', new_staff_session_path
+            - else
+              div
+                | You are #{current_staff.you}
+              div
+                = link_to 'Sign out', destroy_staff_session_path
 
-						- if current_staff
-							div
-								= link_to 'View Tickets', tickets_path
+            - if current_staff
+              div
+                = link_to 'View Tickets', tickets_path
 
-			div[class="row voffset4"]
-				= yield
+      div[class="row voffset4"]
+        = yield

@@ -1,7 +1,7 @@
 div[class="clear voffset4 user-win #{ "ticket-#{params[:token]}" if params[:token]}"]
-	div[class="bold"] Answers
-	div[class="voffset4 posts"]
-		- if @posts.any?
-		  	= render @posts
-		- else  
-		  	p[class="no-posts"] There are no answers available
+  div[class="bold"] Answers
+  div[class="voffset4 posts"]
+    - if @posts.any?
+        = render @posts
+    - else  
+        p[class="no-posts"] There are no answers available

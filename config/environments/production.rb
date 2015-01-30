@@ -81,22 +81,10 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options   = { :host => 'localhost:3000' }
-  config.action_mailer.delivery_method       = :postmark
-  config.action_mailer.postmark_settings     = { :api_key => '21f4c72d-0f9e-4b35-9a5f-154e55a9295a' }
-
-
-
-
-
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options   = { :host => 'localhost:3000' }
   config.action_mailer.asset_host = "http://localhost:3000" 
-
 
   ActionMailer::Base.smtp_settings = {
     :address   => 'smtp.gmail.com',
@@ -108,4 +96,5 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 
+  ActionMailer::Base.default from: 'drobazko.dev@gmail.com'
 end
