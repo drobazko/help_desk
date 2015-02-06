@@ -17,7 +17,7 @@ Ticket.create(
   customer_email: "drobazko@gmail.com",
   subject: Faker::Lorem.sentence, 
   body: Faker::Lorem.paragraph,
-  department: Department.find(rand(1..departments_quantity))
+  department: Department.find(Department.ids[rand(1..Department.count)-1])
 )
 
 1.upto(tickets_quantity){|i| 
@@ -26,7 +26,7 @@ Ticket.create(
     customer_email: Faker::Internet.email,
     subject: Faker::Lorem.sentence, 
     body: Faker::Lorem.paragraph,
-    department: Department.find(rand(1..departments_quantity))
+    department: Department.find(Department.ids[rand(1..Department.count)-1])
   )
 }
 
@@ -51,7 +51,7 @@ Staff.create!(
 
   1.upto(posts_quantity){|j| staff.posts.new(
     body: "It's Simple Sample Customer ##{i} Post ##{j}. #{Faker::Lorem.paragraph} Enjoy It!",
-    ticket: Ticket.find(rand(1..tickets_quantity))
+    ticket: Ticket.find(Ticket.ids[rand(1..Ticket.count)-1])
     )
   }
   
@@ -68,7 +68,7 @@ Staff.create!(
     password_confirmation: '12345678',
   )
 
-  staff.department = Department.find(rand(1..departments_quantity))
+  staff.department = Department.find(Department.ids[rand(1..Department.count)-1])
 
   1.upto(posts_quantity){|j| staff.posts.new(
     body: "It's Simple Sample Stuff ##{i} Post ##{j}. #{Faker::Lorem.paragraph} Enjoy It!",
