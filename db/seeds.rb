@@ -1,3 +1,7 @@
+def rand_record(table_name)
+  table_name.find(table_name.ids[rand(1..table_name.count)-1])
+end
+
 departments_quantity = 5
 tickets_quantity = 20
 staffs_quantity = 5
@@ -17,7 +21,7 @@ Ticket.create(
   customer_email: "drobazko@gmail.com",
   subject: Faker::Lorem.sentence, 
   body: Faker::Lorem.paragraph,
-  department: Department.find(Department.ids[rand(1..Department.count)-1])
+  department: rand_record(Department)
 )
 
 1.upto(tickets_quantity){|i| 
@@ -26,7 +30,7 @@ Ticket.create(
     customer_email: Faker::Internet.email,
     subject: Faker::Lorem.sentence, 
     body: Faker::Lorem.paragraph,
-    department: Department.find(Department.ids[rand(1..Department.count)-1])
+    department: rand_record(Department)
   )
 }
 
@@ -51,7 +55,7 @@ Staff.create!(
 
   1.upto(posts_quantity){|j| staff.posts.new(
     body: "It's Simple Sample Customer ##{i} Post ##{j}. #{Faker::Lorem.paragraph} Enjoy It!",
-    ticket: Ticket.find(Ticket.ids[rand(1..Ticket.count)-1])
+    ticket: rand_record(Ticket)
     )
   }
   
@@ -68,11 +72,11 @@ Staff.create!(
     password_confirmation: '12345678',
   )
 
-  staff.department = Department.find(Department.ids[rand(1..Department.count)-1])
+  staff.department = rand_record(Department)
 
   1.upto(posts_quantity){|j| staff.posts.new(
     body: "It's Simple Sample Stuff ##{i} Post ##{j}. #{Faker::Lorem.paragraph} Enjoy It!",
-    ticket: Ticket.find(rand(1..tickets_quantity))
+    ticket: rand_record(Ticket)
     )
   }
   
