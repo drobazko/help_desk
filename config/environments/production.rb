@@ -97,4 +97,7 @@ Rails.application.configure do
   }
 
   ActionMailer::Base.default from: 'drobazko.dev@gmail.com'
+
+  # Heroku patch
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
 end
