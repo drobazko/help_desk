@@ -100,4 +100,6 @@ Rails.application.configure do
 
   # Heroku patch
   config.secret_key_base = ENV["SECRET_KEY_BASE"]
+  config.s3_access_key_id = ENV["s3_access_key_id"]
+  config.s3_secret_access_key = ENV["s3_secret_access_key"]
 end
