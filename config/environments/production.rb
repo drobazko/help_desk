@@ -91,7 +91,7 @@ Rails.application.configure do
     :port      => 587,
     :domain    => 'gmail.com',
     :user_name => 'drobazko.dev@gmail.com',
-    :password  => Rails.application.secrets.gmail_pass,
+    :password  => ENV["gmail_pass"],
     :authentication => :plain,
     :enable_starttls_auto => true
   }
@@ -103,5 +103,4 @@ Rails.application.configure do
   config.s3_access_key_id = ENV["s3_access_key_id"]
   config.s3_secret_access_key = ENV["s3_secret_access_key"]
   config.akismet_api_key = ENV["akismet_api_key"]
-  config.gmail_pass = ENV["gmail_pass"]
 end
