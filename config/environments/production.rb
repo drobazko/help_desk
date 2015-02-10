@@ -99,7 +99,7 @@ Rails.application.configure do
   ActionMailer::Base.default from: 'drobazko.dev@gmail.com'
 
   # Heroku patch
-  config.secret_key_base = ENV["SECRET_KEY_BASE"]
+  config.secrets.secret_key_base = ENV["SECRET_KEY_BASE"]
   config.s3_access_key_id = ENV["s3_access_key_id"]
   config.s3_secret_access_key = ENV["s3_secret_access_key"]
   config.akismet_api_key = ENV["akismet_api_key"]
