@@ -25,7 +25,7 @@ div
   div
     = f.label :body, "Ticket Body:"
   div
-    = f.text_area(:body, size: '16x4', value: "Sample Body") 
+    = f.text_area(:body, size: '16x4') 
 
 div[class="pictures clear-float"]
   = render @pictures if @pictures

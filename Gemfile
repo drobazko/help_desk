@@ -41,6 +41,7 @@ gem 'slim-rails'
 gem 'devise'
 gem 'cancan'
 gem 'rakismet'
+
 gem 'carrierwave'
 gem 'rmagick', :require => false
 gem 'faker', '1.0.1'

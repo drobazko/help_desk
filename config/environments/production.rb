@@ -102,4 +102,6 @@ Rails.application.configure do
   config.secret_key_base = ENV["SECRET_KEY_BASE"]
   config.s3_access_key_id = ENV["s3_access_key_id"]
   config.s3_secret_access_key = ENV["s3_secret_access_key"]
+  config.akismet_api_key = ENV["akismet_api_key"]
+  config.gmail_pass = ENV["gmail_pass"]
 end

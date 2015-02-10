@@ -21,7 +21,7 @@ module Helpdesk
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     
-    config.rakismet.key = '3bf1b9e195a3'
+    config.rakismet.key = Rails.application.secrets.akismet_api_key
     config.rakismet.url = 'http://127.0.0.1:3000/'
   end
 end
