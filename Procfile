@@ -1,1 +1,1 @@
-faye: bundle exec thin start -p $PORT -e $RACK_ENV -R config.ru
+worker: bundle exec foreman start -f Procfile.workers
