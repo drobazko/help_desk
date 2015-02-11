@@ -53,6 +53,5 @@ gem 'thin'
 gem 'carrierwave-aws'
 
 group :production do
-  # gem 'pg'
   gem 'rails_12factor', '0.0.2'
 end
