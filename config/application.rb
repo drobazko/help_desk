@@ -23,5 +23,8 @@ module Helpdesk
     
     # config.rakismet.key = Rails.application.secrets.akismet_api_key
     # config.rakismet.url = 'http://127.0.0.1:3000/'
+
+    config.middleware.delete Rack::Lock
+    config.middleware.use FayeRails::Middleware, mount: '/faye', :timeout => 25
   end
 end

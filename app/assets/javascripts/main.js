@@ -1,12 +1,7 @@
 $(function() {
-  var faye = new Faye.Client('http://localhost:9292/faye');
-  faye.subscribe('/posts/new', function (data) {
-      eval(data);
-  });  
-
-    $(".remotable").on("change", function(){
-        $(this).closest('form').submit();
-    });
+  $(".remotable").on("change", function(){
+    $(this).closest('form').submit();
+  });
 
   $('#token').autocomplete({
     serviceUrl:'/tickets/suggestions',
@@ -28,10 +23,11 @@ $(function() {
       $('.ajax-loader').hide();
     });
 
-  $.scrollTo($('.highlight-me'), 1000, function(){
-    $('.highlight-me').css({transition: 'background-color 3s ease-in-out', "background-color": "white"});
-  });
-
+  dest_elem = $('.highlight-me')  
+  if ( dest_elem.length ) {
+    $.scrollTo(dest_elem, 1000, function(){
+      dest_elem.css({transition: 'background-color 3s ease-in-out', "background-color": "white"});
+    });
+  }
   
-
 });
