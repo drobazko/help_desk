@@ -83,8 +83,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options   = { :host => 'pacific-savannah-8641.herokuapp.com' }
-  config.action_mailer.asset_host = "https://pacific-savannah-8641.herokuapp.com" 
+  config.action_mailer.default_url_options   = { :host => ENV["heroku_host"] }
+  config.action_mailer.asset_host = "https://#{ENV["heroku_host"]}" 
 
   ActionMailer::Base.smtp_settings = {
     :address   => 'smtp.gmail.com',
