@@ -1,0 +1,14 @@
+- content_for :admin_list do
+  h1 Edit Post
+
+  h3 -> Ticket #{@ticket.token}
+
+  div[class="pictures clear-float voffset4"]
+    = render(partial: @post.pictures)
+
+  = render partial: '/posts/post_form', locals: {remote: false, ticket: @ticket, post: @post}
+
+  div
+    = link_to "List of Ticket Posts", ticket_posts_path(@ticket)
+
+= render :template => 'layouts/admin_layout'

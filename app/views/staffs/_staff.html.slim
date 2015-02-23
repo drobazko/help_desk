@@ -1,0 +1,19 @@
+div[class="voffset4"]
+  = form_for staff, remote: true do |f|
+    div
+      | #{staff.name } ( #{staff.email} )
+    div 
+      | role: #{staff.role}
+
+    div
+      div
+        = f.label :department_id, "Department:"
+      div
+        = f.select(:department_id, @dpts, { :include_blank => true, :selected => staff.department.try(:id) }, class: :remotable)
+
+    div
+      div[class="to-left"]
+        = f.label :only_department, "Only Department:"
+
+      div[class="to-left"]
+        = f.check_box :only_department, class: :remotable

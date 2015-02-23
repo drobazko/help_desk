@@ -1,0 +1,12 @@
+- content_for :admin_list do
+  h1 Change Password
+
+  = form_for(@staff, :url => { :action => "update_password" } ) do |f|
+    = render partial: 'shared/errors', locals: {entity: @staff}  
+
+    = render partial: 'password_fields', locals: {f: f}
+
+    div[class="action_container"]
+      = f.submit
+
+= render :template => 'layouts/admin_layout'

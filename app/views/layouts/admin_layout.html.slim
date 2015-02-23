@@ -1,0 +1,9 @@
+div
+  = form_tag nil, id: "sugg_form", method: :get
+    = text_field_tag :token, params[:token], placeholder: "OAZ-217-YMH-824-PIO"
+
+div[class="menu to-left span3"]
+  = render '/shared/menu'
+
+div[class="to-left span9"]
+  = yield(:admin_list)

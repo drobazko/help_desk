@@ -1,0 +1,12 @@
+- content_for :admin_list do
+  h1 Full Text Search
+  div
+    = form_tag search_tickets_path
+      div
+        = text_field_tag :query, params[:query], placeholder: "Aperiam nam ipsa."
+      div
+        = button_tag 'Go!', class: 'btn btn-primary'
+  div
+    = render(@tickets) || "No tickets found"
+
+= render :template => 'layouts/admin_layout'

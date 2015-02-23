@@ -1,0 +1,130 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+  */
+@media (min-width: 1200px) {
+  body {padding-bottom: 100px;}
+  .container {
+    width: 1170px;
+  }
+}
+
+header {
+  color: #F0F0F0;
+  background: #00518F;
+  padding: 10px 10px;
+}
+
+.clear-float { overflow: auto; }
+
+.bold { font-weight: bold;}
+
+.clear { clear: both }
+
+.notice {
+  color: blue;
+  font-weight: bold;
+}
+
+.drop-box { width: 500px; }
+
+.menu { margin-right: 30px; }
+
+.menu ul { margin: 0px; }
+
+.to-left { float: left; }
+
+.spacer {margin: 5px;}
+
+.voffset2 { margin-top: 10px; }
+
+.voffset4 { margin-top: 30px; }
+
+.posts > div { clear: both; overflow: auto; }
+
+.actions > div {float: left; margin-right: 10px;}
+
+nav ul {
+    list-style: none outside none;
+}
+
+.menu li {
+    padding-bottom: 15px;
+    vertical-align: middle;
+}
+
+.menu li a.menu-selected {
+    background-color: #C5D9EB;
+    color: #00518F;
+    display: block;
+    font-size: 15px;
+    padding: 5px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.menu li a {
+    color: #00518F;
+    display: block;
+    font-size: 15px;
+    padding:5px;
+
+    text-decoration: none;
+    width: 100%;
+}
+
+.menu a:hover {
+  background-color: #C5D9EB;
+}
+
+.selected-menu-item {
+  background-color: #C5D9EB;
+}
+
+.border-row { border-bottom: 2px solid #ccc; }
+
+.posts > div { margin-bottom: 20px; }
+
+.pictures > div {float: left; margin-right: 20px;}
+
+.autocomplete-w1 { background:url(/assets/shadow.png) no-repeat bottom right; position:absolute; top:0px; left:0px; margin:6px 0 0 6px; /* IE6 fix: */ _background:none; _margin:1px 0 0 0; } 
+.autocomplete { border:1px solid #999; background:#FFF; cursor:default; text-align:left; max-height:350px; overflow:auto; margin:-6px 6px 6px -6px; /* IE6 specific: */ _height:350px;  _margin:0; _overflow-x:hidden; } 
+.autocomplete .selected { background:#F0F0F0; } 
+.autocomplete div { padding:2px 5px; white-space:nowrap; overflow:hidden; } 
+.autocomplete strong { font-weight:normal; color:#3399FF; } 
+
+.hide-me { display: none; }
+
+div.ajax-loader {
+    width: 160px; 
+    font-style: italic; 
+    position: fixed; 
+    top: 0px;
+    left: 5px;  
+}
+
+.highlight-me { background-color: #ff9f5f}
+
+.remember-me > div {
+  float: left;
+  margin-bottom: 15px;
+}
+
+.remember-me > div:first-child {
+  margin-right: 5px;
+}
+
+.nav-bar h1 { margin-left: 45px; }
+.nav-bar h1 a { color: #fff; }
+.nav-bar h1 a:hover { text-decoration: none; }

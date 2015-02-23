@@ -1,0 +1,9 @@
+div[class="span12"]
+  h1 Add a new Ticket
+
+  = form_for @ticket, html: {multipart: :true} do |f|
+    = render partial: "fields", locals: {f: f}
+
+    div[class="voffset4"]
+      = f.submit "Create a Ticket", class: 'btn btn-primary', type: 'submit'
+

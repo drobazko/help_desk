@@ -1,0 +1,20 @@
+nav
+  ul
+    - Ticket::SECTIONS.each do |k, v|
+      li
+        = link_to v, tickets_path(:section => k), class: ('selected-menu-item' if k.to_s == params[:section] && action_name != 'search_form')
+
+    li
+      = link_to "Change Password", edit_staff_path, class: ('selected-menu-item' if action_name == 'edit')
+
+    - if current_staff.admin?
+      li
+        = link_to "Manage Members", staffs_path, class: ('selected-menu-item' if controller_name == 'staffs' && action_name == 'index')
+      li
+        = link_to "Create a Member", new_staff_path, class: ('selected-menu-item' if action_name == 'new')
+
+    li
+      = link_to "Full Text Search", search_form_tickets_path, class: ('selected-menu-item' if action_name == 'search_form')
+
+    li
+      = link_to "History", histories_path

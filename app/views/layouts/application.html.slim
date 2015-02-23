@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    title Help Desk App
+
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+
+    = csrf_meta_tags
+  body
+    div[class="clear-float hide-me ajax-loader"]
+      div[class="to-left"]
+        = image_tag "ajax-loader.gif"      
+      
+      div[class="to-left loading"]
+        | loading...
+    
+    header[class="nav-bar"]
+      h1
+        = link_to 'Help Desk App', root_path
+    div[class="container"]
+      div[class="row"]
+        div[class="span12 voffset4"]
+          div
+            p[class="notice"]
+              = notice
+            - unless @devise_controllers
+              p[class="notice"]
+                = alert
+          div
+            - unless current_staff
+                = link_to 'Sign in', new_staff_session_path
+            - else
+              div
+                | You are #{current_staff.you}
+              div
+                = link_to 'Sign out', destroy_staff_session_path
+
+            - if current_staff
+              div
+                = link_to 'View Tickets', tickets_path
+
+      div[class="row voffset4"]
+        = yield

@@ -1,0 +1,17 @@
+div
+  = form_for [ticket, post], remote: remote, html: {multipart: :true} do |f|
+    div[class="voffset4"]
+      - if remote
+        = token_tag form_authenticity_token
+
+      div
+        = f.text_area(:body, size: '100x6', value: "Comment", class: 'field span12') 
+        
+      div
+          = f.fields_for :pictures, Picture.new, remote: true do |p|
+            div
+              /= p.label :content, "ScreenShots"
+              = p.file_field :content, :multiple => true, name: "pictures[content][]"
+
+      div[class="voffset2"]
+        = f.submit "Post", class: 'btn btn-primary', type: 'submit'

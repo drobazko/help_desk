@@ -1,0 +1,6 @@
+p Hi, man!
+p Ticket have been received.
+div
+  = link_to "Edit Ticket", edit_tickets_url(@ticket.token)
+div
+  = link_to "View Ticket", show_tickets_url(@ticket.token)
