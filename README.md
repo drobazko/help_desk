@@ -47,11 +47,3 @@ A simple system for tracking incoming enquiries from customers with an easy to u
 * All changes to the status, owner and response are tracked and visible to all staff members. 
 * Admin can add/edit/delete departments, change department of staff members; 
 * There is a possibility to separate departments issues for staff members, so members of one department can view only own department issues and add possibility for staff members to change department. 
-
-
-### Preparation ###
-
-1. Rebuild index
-	`rake ts:index`
-2. Run engine
-	`rake ts:start`
