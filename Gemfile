@@ -48,7 +48,6 @@ gem 'rakismet'
 gem 'carrierwave'
 gem 'rmagick', :require => false
 gem 'faker', '1.0.1'
-# gem 'thinking-sphinx', '~> 3.1.0'
 
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
@@ -64,3 +63,16 @@ group :production do
 end
 
 gem 'faye-rails', '~> 2.0'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  gem "shoulda-matchers", "~> 2.2.0"
+end

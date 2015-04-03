@@ -16,4 +16,7 @@
 //= require jquery.remotipart
 //= require turbolinks
 //= require faye
+//= require bootstrap
+//= require jquery.autocomplete
+//= require jquery.scrollTo-1.4.2-min 
 //= require_tree .

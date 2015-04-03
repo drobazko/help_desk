@@ -9,7 +9,7 @@ class Ticket < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  paginates_per 5
+  paginates_per 10
   
   has_many :pictures, as: :imageable
   has_many :posts  
@@ -49,7 +49,8 @@ class Ticket < ActiveRecord::Base
 
     unless s
       pass = "q2s3d4f5f5g6g6"  
-      Staff.new(name: self.customer_name, email: self.customer_email, password: pass, password_confirmation: pass, role: 'customer').save
+      s = Staff.new(name: self.customer_name, email: self.customer_email, password: pass, password_confirmation: pass, role: 'customer')
+      s.save
     end
 
     if self.status_id_changed?
@@ -64,7 +65,7 @@ class Ticket < ActiveRecord::Base
     self.staff = s
   end
 
-  scope :with_department, ->(staff) { staff.department_id and staff.member? ? where(department_id: staff.department_id) : all }
+  scope :with_department, ->(staff) { staff.department_id and staff.member? ? where("department_id = :dep_id or department_id is null", {dep_id: staff.department_id}) : all }
   scope :unassigned, -> { where(taken_staff_id: nil) }
   scope :on_hold, -> { joins(:status).where("taken_staff_id is not null and statuses.short_title in ('on_hold')") }
   scope :opened, -> { joins(:status).where("taken_staff_id is not null and statuses.short_title not in ('on_hold', 'cancelled', 'completed')") }

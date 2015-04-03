@@ -24,23 +24,6 @@ class TicketsController < ApplicationController
 
     @ticket.init_sp(show_tickets_path(Ticket.generate_id), request)
     @ticket.errors.add(:base, "Are You Spammer?") if @ticket.spam?
-
-    # client = Akismet::Client.new(
-    #   Rails.application.secrets.akismet_api_key, 
-    #   Rails.application.config.action_mailer.asset_host
-    # )
-
-    # # assumes variables comment, post_url, request (a racklike HTTP request)
-    # spam = client.comment_check( request.remote_ip,
-    #   request.user_agent,
-    #   content_type: 'comment',
-    #   referrer: request.headers[ 'HTTP_REFERER' ],
-    #   permalink: tickets_path, 
-    #   comment_author: @ticket.customer_name,
-    #   comment_author_email: @ticket.customer_email,
-    #   comment_content: @ticket.body )
-
-    # @ticket.errors.add(:base, "Are You Spammer?") if spam
     
     if @ticket.errors.empty? and @ticket.save
       save_images @ticket
