@@ -67,6 +67,8 @@ gem 'faye-rails', '~> 2.0'
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
+  gem 'konacha'
+  gem 'chai-jquery-rails'
 end
 
 group :test do
@@ -75,4 +77,5 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
   gem "shoulda-matchers", "~> 2.2.0"
+  gem 'minitest'
 end
