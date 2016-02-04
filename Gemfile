@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.2'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.3.13', :platform => :ruby
 gem 'jdbc-mysql', '5.1.28', :platform => :jruby
